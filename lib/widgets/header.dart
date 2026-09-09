@@ -74,7 +74,7 @@ class Header extends StatelessWidget {
             ),
           OutlinedButton(
             onPressed: () async {
-              final Uri url = Uri.parse('assets/docs/resume.pdf');
+              final Uri url = Uri.base.resolve('resume.pdf');
               await launchUrl(url, webOnlyWindowName: '_blank');
             },
             style: OutlinedButton.styleFrom(
