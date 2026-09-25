@@ -60,7 +60,7 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
                     'My Skills',
                     style: TextStyle(fontFamily: 'Cormorant Garamond', fontSize: 48, color: Colors.black),
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 32),
                   Row(
                     children: [
                       Container(width: 24, height: 1, color: Colors.black),
