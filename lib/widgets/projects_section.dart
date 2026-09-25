@@ -148,7 +148,7 @@ class ProjectsSection extends StatelessWidget {
           Wrap(
             spacing: 8,
             runSpacing: 8,
-            children: caseStudy.technologies.map((t) => _buildTechBadge(t)).toList(),
+            children: caseStudy.technologies.map((t) => HoverTechBadge(tech: t)).toList(),
           ),
           const SizedBox(height: 24),
           _buildCaseStudyButton(context, caseStudy),
@@ -195,7 +195,7 @@ class ProjectsSection extends StatelessWidget {
               Wrap(
                 spacing: 8,
                 runSpacing: 8,
-                children: caseStudy.technologies.map((t) => _buildTechBadge(t)).toList(),
+                children: caseStudy.technologies.map((t) => HoverTechBadge(tech: t)).toList(),
               ),
               const SizedBox(height: 24),
               _buildCaseStudyButton(context, caseStudy),
@@ -203,21 +203,6 @@ class ProjectsSection extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildTechBadge(String tech) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      decoration: BoxDecoration(
-        color: Colors.grey.shade100,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.grey.shade200),
-      ),
-      child: Text(
-        tech.trim(),
-        style: TextStyle(fontFamily: 'DM Mono', fontSize: 11, color: Colors.grey.shade800),
-      ),
     );
   }
 

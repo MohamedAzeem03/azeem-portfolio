@@ -14,7 +14,7 @@ class CaseStudyModal extends StatelessWidget {
       backgroundColor: Colors.transparent,
       elevation: 0,
       child: Container(
-        width: isMobile ? double.infinity : 800,
+        width: isMobile ? double.infinity : 1000, // Widened modal for split view
         constraints: BoxConstraints(
           maxHeight: MediaQuery.of(context).size.height * 0.85,
         ),
@@ -24,7 +24,7 @@ class CaseStudyModal extends StatelessWidget {
           border: Border.all(color: Colors.grey.shade200),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 20,
               offset: const Offset(0, 10),
             ),
@@ -84,15 +84,40 @@ class CaseStudyModal extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildSection('Challenge', caseStudy.challenge),
-                    _buildSection('Solution', caseStudy.solution),
-                    _buildListSection('My Role', caseStudy.myRole),
-                    _buildListSection('Key Outcomes', caseStudy.keyOutcomes),
+                    if (isMobile) ...[
+                      _buildSection('Challenge', caseStudy.challenge),
+                      _buildSection('Solution', caseStudy.solution),
+                    ] else
+                      IntrinsicHeight(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(child: _buildSection('Challenge', caseStudy.challenge)),
+                            const VerticalDivider(width: 48, thickness: 1, color: Color(0xFFE5E5E5)),
+                            Expanded(child: _buildSection('Solution', caseStudy.solution)),
+                          ],
+                        ),
+                      ),
                     
-                    const SizedBox(height: 32),
-                    Text(
+                    if (isMobile) ...[
+                      _buildListSection('My Role', caseStudy.myRole),
+                      _buildListSection('Key Outcomes', caseStudy.keyOutcomes),
+                    ] else
+                      IntrinsicHeight(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(child: _buildListSection('My Role', caseStudy.myRole)),
+                            const VerticalDivider(width: 48, thickness: 1, color: Color(0xFFE5E5E5)),
+                            Expanded(child: _buildListSection('Key Outcomes', caseStudy.keyOutcomes)),
+                          ],
+                        ),
+                      ),
+                    
+                    const SizedBox(height: 16),
+                    const Text(
                       'Technologies',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontFamily: 'Cormorant Garamond',
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -103,7 +128,7 @@ class CaseStudyModal extends StatelessWidget {
                     Wrap(
                       spacing: 8,
                       runSpacing: 8,
-                      children: caseStudy.technologies.map((t) => _buildTechBadge(t)).toList(),
+                      children: caseStudy.technologies.map((t) => HoverTechBadge(tech: t)).toList(),
                     ),
                   ],
                 ),
@@ -193,21 +218,40 @@ class CaseStudyModal extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _buildTechBadge(String tech) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      decoration: BoxDecoration(
-        color: Colors.grey.shade100,
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.grey.shade200),
-      ),
-      child: Text(
-        tech.trim(),
-        style: TextStyle(
-          fontFamily: 'DM Mono',
-          fontSize: 11,
-          color: Colors.grey.shade800,
+class HoverTechBadge extends StatefulWidget {
+  final String tech;
+  const HoverTechBadge({super.key, required this.tech});
+
+  @override
+  State<HoverTechBadge> createState() => _HoverTechBadgeState();
+}
+
+class _HoverTechBadgeState extends State<HoverTechBadge> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+        decoration: BoxDecoration(
+          color: _isHovered ? Colors.black : Colors.grey.shade100,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: _isHovered ? Colors.black : Colors.grey.shade200),
+        ),
+        child: AnimatedDefaultTextStyle(
+          duration: const Duration(milliseconds: 200),
+          style: TextStyle(
+            fontFamily: 'DM Mono',
+            fontSize: 11,
+            color: _isHovered ? Colors.white : Colors.grey.shade800,
+          ),
+          child: Text(widget.tech.trim()),
         ),
       ),
     );

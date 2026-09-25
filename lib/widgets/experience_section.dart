@@ -30,7 +30,7 @@ class ExperienceSection extends StatelessWidget {
           const SizedBox(height: 48),
           _buildExperienceItem(
             '2026', 'Internship',
-            'Python Full Stack Intern', 'Alric/Altrik Infotech Pvt. Ltd., Trivandrum',
+            'Python Full Stack Intern', 'Alric Infotech Pvt. Ltd., Trivandrum',
             'Practical engagement in Python full-stack web development, implementing backend logic, connecting endpoints, and developing modular dynamic web applications.'
           ),
           const Divider(color: Color(0xFFE5E5E5), height: 64),
