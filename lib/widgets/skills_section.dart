@@ -412,36 +412,35 @@ void _drawDashedLineAndArrow(Canvas canvas, Path path, double progress) {
 
   PathDashPainter(dashPaint, path, dashLength: 4, dashSpace: 4).draw(canvas);
 
-  // 2. Draw Moving Arrows continuously along the line
-  double arrowSpacing = 70.0; 
-  double shift = progress * arrowSpacing;
-
+  // 2. Draw Moving Arrow (One per line, constant speed, smooth fade in/out)
   for (PathMetric metric in path.computeMetrics()) {
-    // Draw arrows spaced by `arrowSpacing`
-    double d = shift;
-    while (d < metric.length) {
-      Tangent? tangent = metric.getTangentForOffset(d);
-      if (tangent != null) {
-        canvas.save();
-        canvas.translate(tangent.position.dx, tangent.position.dy);
-        canvas.rotate(math.atan2(tangent.vector.dy, tangent.vector.dx));
+    // 600 pixels per cycle so all arrows move at exactly the same speed
+    double distance = (progress * 600) % metric.length;
+    
+    Tangent? tangent = metric.getTangentForOffset(distance);
+    if (tangent != null) {
+      canvas.save();
+      canvas.translate(tangent.position.dx, tangent.position.dy);
+      canvas.rotate(math.atan2(tangent.vector.dy, tangent.vector.dx));
 
-        // Draw small black arrow head
-        Path arrowPath = Path();
-        arrowPath.moveTo(5, 0);
-        arrowPath.lineTo(-3, 3);
-        arrowPath.lineTo(-1, 0);
-        arrowPath.lineTo(-3, -3);
-        arrowPath.close();
+      // Fade in and out at the start and end of the path to prevent snapping
+      double opacity = 1.0;
+      if (distance < 15) opacity = distance / 15;
+      if (distance > metric.length - 15) opacity = (metric.length - distance) / 15;
 
-        Paint arrowPaint = Paint()
-          ..color = Colors.black
-          ..style = PaintingStyle.fill;
+      Path arrowPath = Path();
+      arrowPath.moveTo(5, 0);
+      arrowPath.lineTo(-3, 3);
+      arrowPath.lineTo(-1, 0);
+      arrowPath.lineTo(-3, -3);
+      arrowPath.close();
 
-        canvas.drawPath(arrowPath, arrowPaint);
-        canvas.restore();
-      }
-      d += arrowSpacing;
+      Paint arrowPaint = Paint()
+        ..color = Colors.black.withAlpha((opacity * 255).toInt())
+        ..style = PaintingStyle.fill;
+
+      canvas.drawPath(arrowPath, arrowPaint);
+      canvas.restore();
     }
   }
 }
