@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 class SkillsSection extends StatelessWidget {
   const SkillsSection({super.key});
@@ -17,16 +17,16 @@ class SkillsSection extends StatelessWidget {
         children: [
           Text(
             '01 / SKILLS',
-            style: GoogleFonts.dmMono(fontSize: 12, color: Colors.grey.shade500, letterSpacing: 1.5),
+            style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500, letterSpacing: 1.5),
           ),
           const SizedBox(height: 8),
           Text(
             'My Skills',
-            style: GoogleFonts.cormorantGaramond(fontSize: 48, color: Colors.black),
+            style: TextStyle(fontFamily: 'Cormorant Garamond', fontSize: 48, color: Colors.black),
           ),
           Text(
             'Technologies & Tools • Academic & Project Experience',
-            style: GoogleFonts.dmMono(fontSize: 14, color: Colors.grey.shade600),
+            style: TextStyle(fontFamily: 'DM Mono', fontSize: 14, color: Colors.grey.shade600),
           ),
           const SizedBox(height: 40),
           Container(
@@ -76,12 +76,12 @@ class SkillsSection extends StatelessWidget {
         children: [
           Text(
             'PRIMARY CORE STACK',
-            style: GoogleFonts.dmMono(fontSize: 10, color: Colors.grey.shade400, letterSpacing: 1.5),
+            style: TextStyle(fontFamily: 'DM Mono', fontSize: 10, color: Colors.grey.shade400, letterSpacing: 1.5),
           ),
           const SizedBox(height: 8),
           Text(
             'Java + Spring Boot + Flutter + Dart + REST APIs + PostgreSQL',
-            style: GoogleFonts.cormorantGaramond(fontSize: 20, color: Colors.white),
+            style: TextStyle(fontFamily: 'Cormorant Garamond', fontSize: 20, color: Colors.white),
           ),
         ],
       ),
@@ -95,7 +95,7 @@ class SkillsSection extends StatelessWidget {
         ),
         child: Text(
           'Cross-Platform & Backend Engineering',
-          style: GoogleFonts.dmMono(fontSize: 12, color: Colors.grey.shade300),
+          style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade300),
         ),
       ),
     ];
@@ -115,12 +115,12 @@ class SkillsSection extends StatelessWidget {
         children: [
           Text(
             subtitle.toUpperCase(),
-            style: GoogleFonts.dmMono(fontSize: 11, color: Colors.grey.shade500, letterSpacing: 1.5),
+            style: TextStyle(fontFamily: 'DM Mono', fontSize: 11, color: Colors.grey.shade500, letterSpacing: 1.5),
           ),
           const SizedBox(height: 8),
           Text(
             title,
-            style: GoogleFonts.cormorantGaramond(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
+            style: TextStyle(fontFamily: 'Cormorant Garamond', fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
           ),
           const SizedBox(height: 16),
           ...items.map((item) => Padding(
@@ -129,7 +129,7 @@ class SkillsSection extends StatelessWidget {
               children: [
                 Container(width: 6, height: 6, decoration: BoxDecoration(color: Colors.grey.shade400, shape: BoxShape.circle)),
                 const SizedBox(width: 8),
-                Expanded(child: Text(item, style: GoogleFonts.dmMono(fontSize: 12, color: Colors.grey.shade700))),
+                Expanded(child: Text(item, style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade700))),
               ],
             ),
           )).toList(),

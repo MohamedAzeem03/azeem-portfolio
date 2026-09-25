@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
 class Header extends StatelessWidget {
@@ -37,7 +37,7 @@ class Header extends StatelessWidget {
             children: [
               Text(
                 'Azeem',
-                style: GoogleFonts.cormorantGaramond(
+                style: TextStyle(fontFamily: 'Cormorant Garamond', 
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
@@ -53,7 +53,7 @@ class Header extends StatelessWidget {
                 ),
                 child: Text(
                   'DEV',
-                  style: GoogleFonts.dmMono(
+                  style: TextStyle(fontFamily: 'DM Mono', 
                     fontSize: 10,
                     color: Colors.grey.shade600,
                   ),
@@ -88,7 +88,7 @@ class Header extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('Resume ', style: GoogleFonts.dmMono(fontSize: 12)),
+                Text('Resume ', style: TextStyle(fontFamily: 'DM Mono', fontSize: 12)),
                 const Icon(Icons.arrow_downward, size: 14),
               ],
             ),
@@ -105,7 +105,7 @@ class Header extends StatelessWidget {
         onTap: onTap,
         child: Text(
           text.toUpperCase(),
-          style: GoogleFonts.dmMono(
+          style: TextStyle(fontFamily: 'DM Mono', 
             fontSize: 12,
             color: Colors.grey.shade600,
             letterSpacing: 1.2,

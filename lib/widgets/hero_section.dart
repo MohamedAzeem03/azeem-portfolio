@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -68,7 +68,7 @@ class HeroSection extends StatelessWidget {
               const SizedBox(width: 8),
               Text(
                 'Full-Stack Developer • Building Digital Experiences',
-                style: GoogleFonts.dmMono(
+                style: TextStyle(fontFamily: 'DM Mono', 
                   fontSize: 12,
                   color: Colors.grey.shade800,
                 ),
@@ -79,7 +79,7 @@ class HeroSection extends StatelessWidget {
         const SizedBox(height: 24),
         Text(
           'Hello I\'m',
-          style: GoogleFonts.cormorantGaramond(
+          style: TextStyle(fontFamily: 'Cormorant Garamond', 
             fontSize: 64,
             height: 1.1,
             color: Colors.black,
@@ -87,7 +87,7 @@ class HeroSection extends StatelessWidget {
         ),
         Text(
           'Mohamed Azeem',
-          style: GoogleFonts.cormorantGaramond(
+          style: TextStyle(fontFamily: 'Cormorant Garamond', 
             fontSize: 64,
             height: 1.1,
             fontStyle: FontStyle.italic,
@@ -96,7 +96,7 @@ class HeroSection extends StatelessWidget {
         ),
         Text(
           'Full-Stack Developer',
-          style: GoogleFonts.cormorantGaramond(
+          style: TextStyle(fontFamily: 'Cormorant Garamond', 
             fontSize: 48,
             height: 1.1,
             color: Colors.grey.shade600,
@@ -105,7 +105,7 @@ class HeroSection extends StatelessWidget {
         const SizedBox(height: 24),
         Text(
           'Passionate about building scalable, user-focused applications across mobile and backend platforms, with a focus on Flutter, Java, Spring Boot, and modern full-stack technologies.',
-          style: GoogleFonts.inter(
+          style: TextStyle(fontFamily: 'Inter', 
             fontSize: 16,
             height: 1.6,
             color: Colors.grey.shade700,
@@ -134,7 +134,7 @@ class HeroSection extends StatelessWidget {
                 children: [
                   Text(
                     'View Projects ',
-                    style: GoogleFonts.dmMono(fontSize: 12),
+                    style: TextStyle(fontFamily: 'DM Mono', fontSize: 12),
                   ),
                   const Icon(Icons.arrow_outward, size: 14),
                 ],
@@ -155,7 +155,7 @@ class HeroSection extends StatelessWidget {
               ),
               child: Text(
                 'Get In Touch',
-                style: GoogleFonts.dmMono(fontSize: 12),
+                style: TextStyle(fontFamily: 'DM Mono', fontSize: 12),
               ),
             ),
             OutlinedButton(
@@ -171,7 +171,7 @@ class HeroSection extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                 ),
               ),
-              child: Text('About Me', style: GoogleFonts.dmMono(fontSize: 12)),
+              child: Text('About Me', style: TextStyle(fontFamily: 'DM Mono', fontSize: 12)),
             ),
           ],
         ),
@@ -185,7 +185,7 @@ class HeroSection extends StatelessWidget {
             children: [
               Text(
                 'PROFILES:',
-                style: GoogleFonts.dmMono(
+                style: TextStyle(fontFamily: 'DM Mono', 
                   fontSize: 10,
                   color: Colors.grey.shade500,
                 ),
@@ -213,7 +213,7 @@ class HeroSection extends StatelessWidget {
           const SizedBox(width: 6),
           Text(
             text,
-            style: GoogleFonts.dmMono(
+            style: TextStyle(fontFamily: 'DM Mono', 
               fontSize: 12,
               color: Colors.grey.shade600,
             ),

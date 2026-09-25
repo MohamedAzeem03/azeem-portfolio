@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'home_page.dart';
 
 void main() {
@@ -23,22 +23,22 @@ class PortfolioApp extends StatelessWidget {
         ),
         scaffoldBackgroundColor: Colors.white,
         textTheme: TextTheme(
-          displayLarge: GoogleFonts.cormorantGaramond(
+          displayLarge: TextStyle(fontFamily: 'Cormorant Garamond', 
             color: const Color(0xFF0a0a0a),
             fontWeight: FontWeight.w400,
             height: 0.95,
           ),
-          displayMedium: GoogleFonts.cormorantGaramond(
+          displayMedium: TextStyle(fontFamily: 'Cormorant Garamond', 
             color: const Color(0xFF0a0a0a),
             fontWeight: FontWeight.w400,
           ),
-          bodyLarge: GoogleFonts.inter(
+          bodyLarge: TextStyle(fontFamily: 'Inter', 
             color: const Color(0xFF111827),
           ),
-          bodyMedium: GoogleFonts.inter(
+          bodyMedium: TextStyle(fontFamily: 'Inter', 
             color: const Color(0xFF4b5563), // text-neutral-600
           ),
-          labelSmall: GoogleFonts.dmMono(
+          labelSmall: TextStyle(fontFamily: 'DM Mono', 
             color: const Color(0xFF737373),
             letterSpacing: 1.5,
           ),

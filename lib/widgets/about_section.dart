@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 class AboutSection extends StatelessWidget {
   const AboutSection({super.key});
@@ -78,9 +78,9 @@ class AboutSection extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 24),
-        Text('05 / PROFILE', style: GoogleFonts.dmMono(fontSize: 12, color: Colors.grey.shade500, letterSpacing: 1.5)),
-        Text('Mohamed Azeem', style: GoogleFonts.cormorantGaramond(fontSize: 32, color: Colors.black)),
-        Text('Full-Stack Application Developer', style: GoogleFonts.dmMono(fontSize: 12, color: Colors.grey.shade600)),
+        Text('05 / PROFILE', style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500, letterSpacing: 1.5)),
+        Text('Mohamed Azeem', style: TextStyle(fontFamily: 'Cormorant Garamond', fontSize: 32, color: Colors.black)),
+        Text('Full-Stack Application Developer', style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade600)),
       ],
     );
   }
@@ -89,16 +89,16 @@ class AboutSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('About Me', style: GoogleFonts.cormorantGaramond(fontSize: 28, color: Colors.black)),
+        Text('About Me', style: TextStyle(fontFamily: 'Cormorant Garamond', fontSize: 28, color: Colors.black)),
         const SizedBox(height: 16),
         Text(
           'I am an MCA student at Francis Xavier Engineering College with a strong drive for software engineering. My work focuses on building robust cross-platform applications and secure, performant backends.',
-          style: GoogleFonts.inter(fontSize: 14, color: Colors.grey.shade600, height: 1.6),
+          style: TextStyle(fontFamily: 'Inter', fontSize: 14, color: Colors.grey.shade600, height: 1.6),
         ),
         const SizedBox(height: 16),
         Text(
           'I believe in clean architecture, type-safety, and writing maintainable code that scales smoothly from development to production.',
-          style: GoogleFonts.inter(fontSize: 14, color: Colors.grey.shade600, height: 1.6),
+          style: TextStyle(fontFamily: 'Inter', fontSize: 14, color: Colors.grey.shade600, height: 1.6),
         ),
       ],
     );
@@ -108,16 +108,16 @@ class AboutSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('What I Do', style: GoogleFonts.cormorantGaramond(fontSize: 28, color: Colors.black)),
+        Text('What I Do', style: TextStyle(fontFamily: 'Cormorant Garamond', fontSize: 28, color: Colors.black)),
         const SizedBox(height: 16),
         Text(
           'Crafting cohesive digital systems using Flutter for unified client interfaces and Java with Spring Boot for enterprise-ready APIs.',
-          style: GoogleFonts.inter(fontSize: 14, color: Colors.grey.shade600, height: 1.6),
+          style: TextStyle(fontFamily: 'Inter', fontSize: 14, color: Colors.grey.shade600, height: 1.6),
         ),
         const SizedBox(height: 16),
         Text(
           'Designing relational databases with PostgreSQL, implementing authentication layers with JWT and Spring Security, and exploring cloud-native paradigms.',
-          style: GoogleFonts.inter(fontSize: 14, color: Colors.grey.shade600, height: 1.6),
+          style: TextStyle(fontFamily: 'Inter', fontSize: 14, color: Colors.grey.shade600, height: 1.6),
         ),
       ],
     );

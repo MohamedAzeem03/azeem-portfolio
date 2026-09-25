@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MarqueeRibbon extends StatefulWidget {
@@ -77,7 +77,7 @@ class _MarqueeRibbonState extends State<MarqueeRibbon> {
                   const SizedBox(width: 8),
                   Text(
                     skill['name'].toString().toUpperCase(),
-                    style: GoogleFonts.dmMono(
+                    style: TextStyle(fontFamily: 'DM Mono', 
                       fontSize: 11,
                       letterSpacing: 2.0,
                       color: Colors.grey.shade600,

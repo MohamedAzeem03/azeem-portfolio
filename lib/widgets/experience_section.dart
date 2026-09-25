@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 class ExperienceSection extends StatelessWidget {
   const ExperienceSection({super.key});
@@ -16,16 +16,16 @@ class ExperienceSection extends StatelessWidget {
         children: [
           Text(
             '03 / EXPERIENCE',
-            style: GoogleFonts.dmMono(fontSize: 12, color: Colors.grey.shade500, letterSpacing: 1.5),
+            style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500, letterSpacing: 1.5),
           ),
           const SizedBox(height: 8),
           Text(
             'My Experience',
-            style: GoogleFonts.cormorantGaramond(fontSize: 48, color: Colors.black),
+            style: TextStyle(fontFamily: 'Cormorant Garamond', fontSize: 48, color: Colors.black),
           ),
           Text(
             'Professional Journey • 2023 — Present',
-            style: GoogleFonts.dmMono(fontSize: 14, color: Colors.grey.shade600),
+            style: TextStyle(fontFamily: 'DM Mono', fontSize: 14, color: Colors.grey.shade600),
           ),
           const SizedBox(height: 48),
           _buildExperienceItem(
@@ -53,11 +53,11 @@ class ExperienceSection extends StatelessWidget {
           child: Text.rich(
             TextSpan(
               text: "$year • ",
-              style: GoogleFonts.dmMono(fontSize: 12, color: Colors.grey.shade500),
+              style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500),
               children: [
                 TextSpan(
                   text: type,
-                  style: GoogleFonts.dmMono(fontWeight: FontWeight.bold, color: Colors.grey.shade800),
+                  style: TextStyle(fontFamily: 'DM Mono', fontWeight: FontWeight.bold, color: Colors.grey.shade800),
                 ),
               ]
             ),
@@ -70,12 +70,12 @@ class ExperienceSection extends StatelessWidget {
             children: [
               Text(
                 role,
-                style: GoogleFonts.cormorantGaramond(fontSize: 24, color: Colors.black),
+                style: TextStyle(fontFamily: 'Cormorant Garamond', fontSize: 24, color: Colors.black),
               ),
               const SizedBox(height: 4),
               Text(
                 company,
-                style: GoogleFonts.dmMono(fontSize: 12, color: Colors.grey.shade500),
+                style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500),
               ),
             ],
           ),
@@ -84,7 +84,7 @@ class ExperienceSection extends StatelessWidget {
           flex: 5,
           child: Text(
             description,
-            style: GoogleFonts.inter(fontSize: 14, color: Colors.grey.shade600, height: 1.6),
+            style: TextStyle(fontFamily: 'Inter', fontSize: 14, color: Colors.grey.shade600, height: 1.6),
           ),
         ),
       ],

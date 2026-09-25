@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import '../models/case_study.dart';
+import 'case_study_modal.dart';
 
 class ProjectsSection extends StatelessWidget {
   const ProjectsSection({super.key});
@@ -17,77 +18,140 @@ class ProjectsSection extends StatelessWidget {
         children: [
           Text(
             '02 / PROJECTS',
-            style: GoogleFonts.dmMono(fontSize: 12, color: Colors.grey.shade500, letterSpacing: 1.5),
+            style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500, letterSpacing: 1.5),
           ),
           const SizedBox(height: 8),
-          Text(
+          const Text(
             'My Projects',
-            style: GoogleFonts.cormorantGaramond(fontSize: 48, color: Colors.black),
+            style: TextStyle(fontFamily: 'Cormorant Garamond', fontSize: 48, color: Colors.black),
           ),
           Text(
             'Selected Works & Personal Endeavors',
-            style: GoogleFonts.dmMono(fontSize: 14, color: Colors.grey.shade600),
+            style: TextStyle(fontFamily: 'DM Mono', fontSize: 14, color: Colors.grey.shade600),
           ),
           const SizedBox(height: 48),
           
           _buildProjectItem(
-            'Devora',
-            'Productivity & Challenge Management App',
-            'Flutter, Dart, Java, Spring Boot, REST APIs, Firebase, Git, GitHub',
+            context,
+            isMobile,
+            const CaseStudy(
+              projectName: 'Devora',
+              projectType: 'Productivity & Challenge Management App',
+              challenge: 'Developers need a structured way to create, participate in, and verify challenges while tracking their progress.',
+              solution: 'Built a mobile application where users can create challenges, set deadlines, accept challenges, submit solutions with proof, and verify completed challenges.',
+              myRole: [
+                'Designed and developed the mobile application',
+                'Implemented the challenge creation and participation workflow',
+                'Developed frontend-backend communication',
+                'Worked on the solution and proof submission flow',
+                'Implemented challenge verification and progress tracking',
+                'Worked on notifications'
+              ],
+              keyOutcomes: [
+                'Challenge creation and acceptance workflow',
+                'Deadline-based challenge management',
+                'Solution and proof submission',
+                'Challenge verification',
+                'Points and streak tracking',
+                'User notifications'
+              ],
+              technologies: ['Flutter', 'Dart', 'Java', 'Spring Boot', 'REST APIs', 'Firebase', 'Git', 'GitHub'],
+            ),
             'Developed a mobile app for creating daily tasks and challenges, setting deadlines, sharing completion proof, and tracking points and streaks.',
-            isMobile,
           ),
           const Divider(color: Color(0xFFE5E5E5), height: 64),
           _buildProjectItem(
-            'Your Friendeey',
-            'AI-Powered Mood Advice Web Application',
-            'React, Django, Python, AI API',
+            context,
+            isMobile,
+            const CaseStudy(
+              projectName: 'Your Friendeey',
+              projectType: 'AI-Powered Mood Advice Web Application',
+              challenge: 'Users may need simple guidance based on their current mood but may not know where to find personalized advice.',
+              solution: 'Built an AI-powered web application that provides advice based on the user\'s selected mood.',
+              myRole: [
+                'Developed the React frontend',
+                'Built backend functionality using Django',
+                'Integrated the AI API',
+                'Connected frontend and backend',
+                'Designed the user interaction flow'
+              ],
+              keyOutcomes: [
+                'Mood-based interaction',
+                'AI-generated advice',
+                'Frontend-backend integration',
+                'AI API integration',
+                'Personalized mood-based responses'
+              ],
+              technologies: ['React', 'Django', 'Python', 'AI API'],
+            ),
             'Developed a web app that provides AI-based advice based on the user\'s mood, with React frontend, Django backend, and AI API integration.',
-            isMobile,
           ),
           const Divider(color: Color(0xFFE5E5E5), height: 64),
           _buildProjectItem(
-            'AZM QuickBite',
-            'Food Ordering Web Application',
-            'Django, Python, HTML, CSS, JavaScript, Bootstrap',
-            'Developed a food ordering web app with user login, product management, cart, order processing, and an interactive QuickBite Assistant.',
+            context,
             isMobile,
+            const CaseStudy(
+              projectName: 'AZM QuickBite',
+              projectType: 'Food Ordering Web Application',
+              challenge: 'Users need a simple way to browse food items, manage their cart, and place orders through a single application.',
+              solution: 'Built a food ordering web application with user authentication, product management, cart functionality, order processing, and an AI-powered QuickBite Assistant.',
+              myRole: [
+                'Developed the web application',
+                'Implemented user login and authentication',
+                'Built product management functionality',
+                'Implemented cart functionality',
+                'Implemented order processing',
+                'Integrated the QuickBite Assistant'
+              ],
+              keyOutcomes: [
+                'Complete food ordering workflow',
+                'User authentication',
+                'Product management',
+                'Shopping cart',
+                'Order processing',
+                'AI chatbot integration'
+              ],
+              technologies: ['Django', 'Python', 'HTML', 'CSS', 'JavaScript', 'Bootstrap'],
+            ),
+            'Developed a food ordering web app with user login, product management, cart, order processing, and an interactive QuickBite Assistant.',
           ),
         ],
       ),
     );
   }
 
-  Widget _buildProjectItem(String name, String type, String tech, String description, bool isMobile) {
+  Widget _buildProjectItem(BuildContext context, bool isMobile, CaseStudy caseStudy, String description) {
     if (isMobile) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            name,
-            style: GoogleFonts.cormorantGaramond(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.black),
+            caseStudy.projectName,
+            style: const TextStyle(fontFamily: 'Cormorant Garamond', fontSize: 32, fontWeight: FontWeight.bold, color: Colors.black),
           ),
           const SizedBox(height: 4),
           Text(
-            type,
-            style: GoogleFonts.dmMono(fontSize: 12, color: Colors.grey.shade500),
+            caseStudy.projectType,
+            style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500),
           ),
           const SizedBox(height: 16),
           Text(
             description,
-            style: GoogleFonts.inter(fontSize: 16, color: Colors.grey.shade700, height: 1.6),
+            style: TextStyle(fontFamily: 'Inter', fontSize: 16, color: Colors.grey.shade700, height: 1.6),
           ),
           const SizedBox(height: 24),
           Text(
             'Technologies:',
-            style: GoogleFonts.dmMono(fontSize: 12, color: Colors.grey.shade500),
+            style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500),
           ),
           const SizedBox(height: 12),
           Wrap(
             spacing: 8,
             runSpacing: 8,
-            children: tech.split(', ').map((t) => _buildTechBadge(t)).toList(),
+            children: caseStudy.technologies.map((t) => _buildTechBadge(t)).toList(),
           ),
+          const SizedBox(height: 24),
+          _buildCaseStudyButton(context, caseStudy),
         ],
       );
     }
@@ -101,13 +165,13 @@ class ProjectsSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                name,
-                style: GoogleFonts.cormorantGaramond(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.black),
+                caseStudy.projectName,
+                style: const TextStyle(fontFamily: 'Cormorant Garamond', fontSize: 32, fontWeight: FontWeight.bold, color: Colors.black),
               ),
               const SizedBox(height: 8),
               Text(
-                type,
-                style: GoogleFonts.dmMono(fontSize: 12, color: Colors.grey.shade500),
+                caseStudy.projectType,
+                style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500),
               ),
             ],
           ),
@@ -120,19 +184,21 @@ class ProjectsSection extends StatelessWidget {
             children: [
               Text(
                 description,
-                style: GoogleFonts.inter(fontSize: 16, color: Colors.grey.shade700, height: 1.6),
+                style: TextStyle(fontFamily: 'Inter', fontSize: 16, color: Colors.grey.shade700, height: 1.6),
               ),
               const SizedBox(height: 24),
               Text(
                 'Technologies:',
-                style: GoogleFonts.dmMono(fontSize: 12, color: Colors.grey.shade500),
+                style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500),
               ),
               const SizedBox(height: 12),
               Wrap(
                 spacing: 8,
                 runSpacing: 8,
-                children: tech.split(', ').map((t) => _buildTechBadge(t)).toList(),
+                children: caseStudy.technologies.map((t) => _buildTechBadge(t)).toList(),
               ),
+              const SizedBox(height: 24),
+              _buildCaseStudyButton(context, caseStudy),
             ],
           ),
         ),
@@ -150,7 +216,33 @@ class ProjectsSection extends StatelessWidget {
       ),
       child: Text(
         tech.trim(),
-        style: GoogleFonts.dmMono(fontSize: 11, color: Colors.grey.shade800),
+        style: TextStyle(fontFamily: 'DM Mono', fontSize: 11, color: Colors.grey.shade800),
+      ),
+    );
+  }
+
+  Widget _buildCaseStudyButton(BuildContext context, CaseStudy caseStudy) {
+    return OutlinedButton(
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (context) => CaseStudyModal(caseStudy: caseStudy),
+        );
+      },
+      style: OutlinedButton.styleFrom(
+        foregroundColor: Colors.black,
+        side: BorderSide(color: Colors.grey.shade300),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Text('View Case Study ', style: TextStyle(fontFamily: 'DM Mono', fontSize: 12)),
+          const Icon(Icons.arrow_forward, size: 14),
+        ],
       ),
     );
   }

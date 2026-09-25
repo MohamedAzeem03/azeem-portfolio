@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -46,16 +46,16 @@ class _ContactSectionState extends State<ContactSection> {
         children: [
           Text(
             '06 / CONTACT',
-            style: GoogleFonts.dmMono(fontSize: 12, color: Colors.grey.shade500, letterSpacing: 1.5),
+            style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500, letterSpacing: 1.5),
           ),
           const SizedBox(height: 8),
           Text(
             'Get In Touch',
-            style: GoogleFonts.cormorantGaramond(fontSize: 48, color: Colors.white),
+            style: TextStyle(fontFamily: 'Cormorant Garamond', fontSize: 48, color: Colors.white),
           ),
           Text(
             'Feel free to reach out for collaborations or just a friendly hello.',
-            style: GoogleFonts.dmMono(fontSize: 14, color: Colors.grey.shade400),
+            style: TextStyle(fontFamily: 'DM Mono', fontSize: 14, color: Colors.grey.shade400),
           ),
           const SizedBox(height: 48),
           isMobile
@@ -79,7 +79,7 @@ class _ContactSectionState extends State<ContactSection> {
           Center(
             child: Text(
               '© 2026 Mohamed Azeem. All rights reserved.',
-              style: GoogleFonts.dmMono(fontSize: 10, color: Colors.grey.shade700),
+              style: TextStyle(fontFamily: 'DM Mono', fontSize: 10, color: Colors.grey.shade700),
             ),
           )
         ],
@@ -123,12 +123,12 @@ class _ContactSectionState extends State<ContactSection> {
             children: [
               Text(
                 title.toUpperCase(),
-                style: GoogleFonts.dmMono(fontSize: 10, color: Colors.grey.shade500, letterSpacing: 1.5),
+                style: TextStyle(fontFamily: 'DM Mono', fontSize: 10, color: Colors.grey.shade500, letterSpacing: 1.5),
               ),
               const SizedBox(height: 2),
               Text(
                 value,
-                style: GoogleFonts.inter(fontSize: 14, color: Colors.white, fontWeight: FontWeight.w500),
+                style: TextStyle(fontFamily: 'Inter', fontSize: 14, color: Colors.white, fontWeight: FontWeight.w500),
               ),
             ],
           ),
@@ -163,7 +163,7 @@ class _ContactSectionState extends State<ContactSection> {
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Send Message ', style: GoogleFonts.dmMono(fontSize: 12, fontWeight: FontWeight.bold)),
+              Text('Send Message ', style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, fontWeight: FontWeight.bold)),
               const Icon(Icons.arrow_outward, size: 14),
             ],
           ),
@@ -176,11 +176,11 @@ class _ContactSectionState extends State<ContactSection> {
     return TextField(
       controller: controller,
       maxLines: maxLines,
-      style: GoogleFonts.inter(fontSize: 14, color: Colors.white),
+      style: TextStyle(fontFamily: 'Inter', fontSize: 14, color: Colors.white),
       cursorColor: Colors.white,
       decoration: InputDecoration(
         hintText: hint,
-        hintStyle: GoogleFonts.inter(fontSize: 14, color: Colors.grey.shade600),
+        hintStyle: TextStyle(fontFamily: 'Inter', fontSize: 14, color: Colors.grey.shade600),
         contentPadding: const EdgeInsets.all(16),
         filled: true,
         fillColor: const Color(0xFF111111),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 class AcademicsSection extends StatelessWidget {
   const AcademicsSection({super.key});
@@ -18,16 +18,16 @@ class AcademicsSection extends StatelessWidget {
         children: [
           Text(
             '04 / ACADEMICS',
-            style: GoogleFonts.dmMono(fontSize: 12, color: Colors.grey.shade500, letterSpacing: 1.5),
+            style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500, letterSpacing: 1.5),
           ),
           const SizedBox(height: 8),
           Text(
             'Education',
-            style: GoogleFonts.cormorantGaramond(fontSize: 48, color: Colors.black),
+            style: TextStyle(fontFamily: 'Cormorant Garamond', fontSize: 48, color: Colors.black),
           ),
           Text(
             'Academic Background • 2022 — 2027',
-            style: GoogleFonts.dmMono(fontSize: 14, color: Colors.grey.shade600),
+            style: TextStyle(fontFamily: 'DM Mono', fontSize: 14, color: Colors.grey.shade600),
           ),
           const SizedBox(height: 48),
           _buildAcademicsItem(
@@ -56,11 +56,11 @@ class AcademicsSection extends StatelessWidget {
           Text.rich(
             TextSpan(
               text: "$year • ",
-              style: GoogleFonts.dmMono(fontSize: 12, color: Colors.grey.shade500),
+              style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500),
               children: [
                 TextSpan(
                   text: type,
-                  style: GoogleFonts.dmMono(fontWeight: FontWeight.bold, color: Colors.grey.shade800),
+                  style: TextStyle(fontFamily: 'DM Mono', fontWeight: FontWeight.bold, color: Colors.grey.shade800),
                 ),
               ]
             ),
@@ -68,17 +68,17 @@ class AcademicsSection extends StatelessWidget {
           const SizedBox(height: 12),
           Text(
             degree,
-            style: GoogleFonts.cormorantGaramond(fontSize: 24, color: Colors.black),
+            style: TextStyle(fontFamily: 'Cormorant Garamond', fontSize: 24, color: Colors.black),
           ),
           const SizedBox(height: 4),
           Text(
             college,
-            style: GoogleFonts.dmMono(fontSize: 12, color: Colors.grey.shade500),
+            style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500),
           ),
           const SizedBox(height: 12),
           Text(
             details,
-            style: GoogleFonts.inter(fontSize: 14, color: Colors.grey.shade600, height: 1.6),
+            style: TextStyle(fontFamily: 'Inter', fontSize: 14, color: Colors.grey.shade600, height: 1.6),
           ),
         ],
       );
@@ -92,11 +92,11 @@ class AcademicsSection extends StatelessWidget {
           child: Text.rich(
             TextSpan(
               text: "$year • ",
-              style: GoogleFonts.dmMono(fontSize: 12, color: Colors.grey.shade500),
+              style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500),
               children: [
                 TextSpan(
                   text: type,
-                  style: GoogleFonts.dmMono(fontWeight: FontWeight.bold, color: Colors.grey.shade800),
+                  style: TextStyle(fontFamily: 'DM Mono', fontWeight: FontWeight.bold, color: Colors.grey.shade800),
                 ),
               ]
             ),
@@ -109,12 +109,12 @@ class AcademicsSection extends StatelessWidget {
             children: [
               Text(
                 degree,
-                style: GoogleFonts.cormorantGaramond(fontSize: 24, color: Colors.black),
+                style: TextStyle(fontFamily: 'Cormorant Garamond', fontSize: 24, color: Colors.black),
               ),
               const SizedBox(height: 4),
               Text(
                 college,
-                style: GoogleFonts.dmMono(fontSize: 12, color: Colors.grey.shade500),
+                style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500),
               ),
             ],
           ),
@@ -124,7 +124,7 @@ class AcademicsSection extends StatelessWidget {
           child: Text(
             details,
             textAlign: TextAlign.center,
-            style: GoogleFonts.inter(fontSize: 14, color: Colors.grey.shade600, height: 1.6),
+            style: TextStyle(fontFamily: 'Inter', fontSize: 14, color: Colors.grey.shade600, height: 1.6),
           ),
         ),
       ],
