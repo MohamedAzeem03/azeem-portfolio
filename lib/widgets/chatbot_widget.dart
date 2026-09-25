@@ -13,10 +13,34 @@ class ChatbotWidget extends StatefulWidget {
   State<ChatbotWidget> createState() => _ChatbotWidgetState();
 }
 
-class _ChatbotWidgetState extends State<ChatbotWidget> {
+class _ChatbotWidgetState extends State<ChatbotWidget> with SingleTickerProviderStateMixin {
   bool _isOpen = false;
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
+  
+  late AnimationController _bobController;
+  late Animation<double> _bobAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _bobController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1500),
+    )..repeat(reverse: true);
+    
+    _bobAnimation = Tween<double>(begin: 0, end: -12).animate(
+      CurvedAnimation(parent: _bobController, curve: Curves.easeInOutSine),
+    );
+  }
+
+  @override
+  void dispose() {
+    _bobController.dispose();
+    _controller.dispose();
+    _scrollController.dispose();
+    super.dispose();
+  }
   
   final List<ChatMessage> _messages = [
     ChatMessage(text: 'Hi! I am Azeem\'s AI assistant. How can I help you today?', isBot: true),
@@ -87,24 +111,33 @@ class _ChatbotWidgetState extends State<ChatbotWidget> {
       children: [
         if (_isOpen) _buildChatWindow(),
         const SizedBox(height: 16),
-        FloatingActionButton(
-          onPressed: () => setState(() => _isOpen = !_isOpen),
-          backgroundColor: Colors.black,
-          elevation: 4,
-          shape: const CircleBorder(),
-          child: ClipOval(
-            child: ColorFiltered(
-              colorFilter: const ColorFilter.matrix([
-                0.2126, 0.7152, 0.0722, 0, 0,
-                0.2126, 0.7152, 0.0722, 0, 0,
-                0.2126, 0.7152, 0.0722, 0, 0,
-                0,      0,      0,      1, 0,
-              ]),
-              child: Image.asset(
-                'assets/images/chatbot.jpg',
-                width: 56,
-                height: 56,
-                fit: BoxFit.cover,
+        AnimatedBuilder(
+          animation: _bobAnimation,
+          builder: (context, child) {
+            return Transform.translate(
+              offset: Offset(0, _isOpen ? 0 : _bobAnimation.value),
+              child: child,
+            );
+          },
+          child: FloatingActionButton(
+            onPressed: () => setState(() => _isOpen = !_isOpen),
+            backgroundColor: Colors.black,
+            elevation: 4,
+            shape: const CircleBorder(),
+            child: ClipOval(
+              child: ColorFiltered(
+                colorFilter: const ColorFilter.matrix([
+                  0.2126, 0.7152, 0.0722, 0, 0,
+                  0.2126, 0.7152, 0.0722, 0, 0,
+                  0.2126, 0.7152, 0.0722, 0, 0,
+                  0,      0,      0,      1, 0,
+                ]),
+                child: Image.asset(
+                  'assets/images/chatbot.jpg',
+                  width: 56,
+                  height: 56,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),

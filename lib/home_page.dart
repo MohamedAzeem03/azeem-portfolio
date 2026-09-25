@@ -74,7 +74,10 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
-      floatingActionButton: const ChatbotWidget(),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(right: 24.0, bottom: 24.0),
+        child: const ChatbotWidget(),
+      ),
     );
   }
 }
