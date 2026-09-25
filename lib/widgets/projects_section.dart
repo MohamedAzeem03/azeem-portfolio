@@ -229,13 +229,32 @@ class ProjectsSection extends StatelessWidget {
           builder: (context) => CaseStudyModal(caseStudy: caseStudy),
         );
       },
-      style: OutlinedButton.styleFrom(
-        foregroundColor: Colors.black,
-        side: BorderSide(color: Colors.grey.shade300),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+      style: ButtonStyle(
+        foregroundColor: MaterialStateProperty.resolveWith<Color>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.hovered)) {
+              return Colors.white;
+            }
+            return Colors.black; // default color
+          },
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        backgroundColor: MaterialStateProperty.resolveWith<Color>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.hovered)) {
+              return Colors.black;
+            }
+            return Colors.transparent; // default color
+          },
+        ),
+        side: MaterialStateProperty.all(BorderSide(color: Colors.grey.shade300)),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+        padding: MaterialStateProperty.all(
+          const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        ),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

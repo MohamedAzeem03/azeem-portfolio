@@ -14,7 +14,7 @@ class CaseStudyModal extends StatelessWidget {
       backgroundColor: Colors.transparent,
       elevation: 0,
       child: Container(
-        width: isMobile ? double.infinity : 600,
+        width: isMobile ? double.infinity : 800,
         constraints: BoxConstraints(
           maxHeight: MediaQuery.of(context).size.height * 0.85,
         ),
