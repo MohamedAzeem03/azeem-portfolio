@@ -10,6 +10,7 @@ import 'widgets/experience_section.dart';
 import 'widgets/academics_section.dart';
 import 'widgets/about_section.dart';
 import 'widgets/contact_section.dart';
+import 'widgets/chatbot_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -73,6 +74,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+      floatingActionButton: const ChatbotWidget(),
     );
   }
 }
