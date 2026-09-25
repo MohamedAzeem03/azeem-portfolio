@@ -222,46 +222,77 @@ class ProjectsSection extends StatelessWidget {
   }
 
   Widget _buildCaseStudyButton(BuildContext context, CaseStudy caseStudy) {
-    return OutlinedButton(
+    return _HoverButton(
+      text: 'View Case Study',
       onPressed: () {
         showDialog(
           context: context,
           builder: (context) => CaseStudyModal(caseStudy: caseStudy),
         );
       },
-      style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.hovered)) {
-              return Colors.white;
-            }
-            return Colors.black; // default color
-          },
-        ),
-        backgroundColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.hovered)) {
-              return Colors.black;
-            }
-            return Colors.transparent; // default color
-          },
-        ),
-        side: MaterialStateProperty.all(BorderSide(color: Colors.grey.shade300)),
-        shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+    );
+  }
+}
+
+class _HoverButton extends StatefulWidget {
+  final VoidCallback onPressed;
+  final String text;
+
+  const _HoverButton({required this.onPressed, required this.text});
+
+  @override
+  State<_HoverButton> createState() => _HoverButtonState();
+}
+
+class _HoverButtonState extends State<_HoverButton> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: widget.onPressed,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 250),
+          curve: Curves.easeInOutSine,
+          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+          decoration: BoxDecoration(
+            color: _isHovered ? Colors.black : Colors.transparent,
+            borderRadius: BorderRadius.circular(24),
+            border: Border.all(
+              color: _isHovered ? Colors.black : Colors.grey.shade300,
+            ),
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              AnimatedDefaultTextStyle(
+                duration: const Duration(milliseconds: 250),
+                curve: Curves.easeInOutSine,
+                style: TextStyle(
+                  fontFamily: 'DM Mono',
+                  fontSize: 12,
+                  color: _isHovered ? Colors.white : Colors.black,
+                ),
+                child: Text('${widget.text} '),
+              ),
+              TweenAnimationBuilder<Color?>(
+                tween: ColorTween(
+                  begin: Colors.black,
+                  end: _isHovered ? Colors.white : Colors.black,
+                ),
+                duration: const Duration(milliseconds: 250),
+                curve: Curves.easeInOutSine,
+                builder: (context, color, child) {
+                  return Icon(Icons.arrow_forward, size: 14, color: color);
+                },
+              ),
+            ],
           ),
         ),
-        padding: MaterialStateProperty.all(
-          const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        ),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          const Text('View Case Study ', style: TextStyle(fontFamily: 'DM Mono', fontSize: 12)),
-          const Icon(Icons.arrow_forward, size: 14),
-        ],
       ),
     );
   }
