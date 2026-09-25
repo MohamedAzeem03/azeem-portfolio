@@ -2,6 +2,7 @@ import 'dart:math' as math;
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:simple_icons/simple_icons.dart';
 
 class SkillsSection extends StatefulWidget {
   const SkillsSection({super.key});
@@ -144,11 +145,11 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
                   child: _SkillNode(
                     title: 'FRONTEND / MOBILE',
                     icons: [
-                      _TechIcon(FaIcon(FontAwesomeIcons.mobileButton), 'Flutter'),
-                      _TechIcon(FaIcon(FontAwesomeIcons.code), 'Dart'),
-                      _TechIcon(FaIcon(FontAwesomeIcons.html5), 'HTML'),
-                      _TechIcon(FaIcon(FontAwesomeIcons.css3), 'CSS'),
-                      _TechIcon(FaIcon(FontAwesomeIcons.js), 'JavaScript'),
+                      _TechIcon(Icon(SimpleIcons.flutter), 'Flutter'),
+                      _TechIcon(Icon(SimpleIcons.dart), 'Dart'),
+                      _TechIcon(Icon(SimpleIcons.html5), 'HTML'),
+                      _TechIcon(Icon(SimpleIcons.css3), 'CSS'),
+                      _TechIcon(Icon(SimpleIcons.javascript), 'JavaScript'),
                     ],
                   ),
                 ),
@@ -160,7 +161,7 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
                   child: _SkillNode(
                     title: 'BACKEND',
                     icons: [
-                      _TechIcon(FaIcon(FontAwesomeIcons.java), 'Java'),
+                      _TechIcon(Icon(FontAwesomeIcons.java, shadows: [Shadow(color: Colors.black, blurRadius: 1), Shadow(color: Colors.black, offset: Offset(0.3, 0.3))]), 'Java'),
                       _TechIcon(FaIcon(FontAwesomeIcons.leaf), 'Spring Boot'),
                       _TechIcon(FaIcon(FontAwesomeIcons.shieldHalved), 'Spring Security'),
                       _TechIcon(FaIcon(FontAwesomeIcons.key), 'JWT'),
@@ -189,7 +190,7 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
                     title: 'AI & INTEGRATION',
                     icons: [
                       _TechIcon(FaIcon(FontAwesomeIcons.brain), 'AI APIs / LLM\nIntegration'),
-                      _TechIcon(FaIcon(FontAwesomeIcons.fire), 'Firebase'),
+                      _TechIcon(Icon(SimpleIcons.firebase), 'Firebase'),
                     ],
                   ),
                 ),
@@ -228,18 +229,18 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
             const _SkillNode(
               title: 'FRONTEND / MOBILE',
               icons: [
-                _TechIcon(FaIcon(FontAwesomeIcons.mobileButton), 'Flutter'),
-                _TechIcon(FaIcon(FontAwesomeIcons.code), 'Dart'),
-                _TechIcon(FaIcon(FontAwesomeIcons.html5), 'HTML'),
-                _TechIcon(FaIcon(FontAwesomeIcons.css3), 'CSS'),
-                _TechIcon(FaIcon(FontAwesomeIcons.js), 'JavaScript'),
+                _TechIcon(Icon(SimpleIcons.flutter), 'Flutter'),
+                _TechIcon(Icon(SimpleIcons.dart), 'Dart'),
+                _TechIcon(Icon(SimpleIcons.html5), 'HTML'),
+                _TechIcon(Icon(SimpleIcons.css3), 'CSS'),
+                _TechIcon(Icon(SimpleIcons.javascript), 'JavaScript'),
               ],
             ),
             _VerticalConnector(progress: _controller.value),
             const _SkillNode(
               title: 'BACKEND',
               icons: [
-                _TechIcon(FaIcon(FontAwesomeIcons.java), 'Java'),
+                _TechIcon(Icon(FontAwesomeIcons.java, shadows: [Shadow(color: Colors.black, blurRadius: 1), Shadow(color: Colors.black, offset: Offset(0.3, 0.3))]), 'Java'),
                 _TechIcon(FaIcon(FontAwesomeIcons.leaf), 'Spring Boot'),
                 _TechIcon(FaIcon(FontAwesomeIcons.shieldHalved), 'Security'),
                 _TechIcon(FaIcon(FontAwesomeIcons.key), 'JWT'),
@@ -258,7 +259,7 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
               title: 'AI & INTEGRATION',
               icons: [
                 _TechIcon(FaIcon(FontAwesomeIcons.brain), 'AI APIs / LLM'),
-                _TechIcon(FaIcon(FontAwesomeIcons.fire), 'Firebase'),
+                _TechIcon(Icon(SimpleIcons.firebase), 'Firebase'),
               ],
             ),
             _VerticalConnector(progress: _controller.value),
