@@ -92,7 +92,7 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
               const SizedBox(width: 16),
               Text(
                 'Technology  ×  Problem Solving  ×  Better Solutions',
-                style: TextStyle(fontFamily: 'DM Mono', fontSize: 10, color: Colors.grey.shade400, letterSpacing: 1.5),
+                style: TextStyle(fontFamily: 'DM Mono', fontSize: 10, color: Colors.grey.shade600, letterSpacing: 1.5),
               ),
               Expanded(
                 child: Padding(
