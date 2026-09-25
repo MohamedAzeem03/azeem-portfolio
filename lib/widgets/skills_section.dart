@@ -148,7 +148,7 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
                       _TechIcon(Icon(SimpleIcons.flutter), 'Flutter'),
                       _TechIcon(Icon(SimpleIcons.dart), 'Dart'),
                       _TechIcon(Icon(SimpleIcons.html5), 'HTML'),
-                      _TechIcon(Icon(SimpleIcons.css3), 'CSS'),
+                      _TechIcon(FaIcon(FontAwesomeIcons.css3), 'CSS'),
                       _TechIcon(Icon(SimpleIcons.javascript), 'JavaScript'),
                     ],
                   ),
@@ -161,7 +161,15 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
                   child: _SkillNode(
                     title: 'BACKEND',
                     icons: [
-                      _TechIcon(Icon(FontAwesomeIcons.java, shadows: [Shadow(color: Colors.black, blurRadius: 1), Shadow(color: Colors.black, offset: Offset(0.3, 0.3))]), 'Java'),
+                      _TechIcon(
+                        Stack(
+                          children: [
+                            Positioned(left: 0.5, top: 0.5, child: FaIcon(FontAwesomeIcons.java)),
+                            FaIcon(FontAwesomeIcons.java),
+                          ],
+                        ),
+                        'Java'
+                      ),
                       _TechIcon(FaIcon(FontAwesomeIcons.leaf), 'Spring Boot'),
                       _TechIcon(FaIcon(FontAwesomeIcons.shieldHalved), 'Spring Security'),
                       _TechIcon(FaIcon(FontAwesomeIcons.key), 'JWT'),
@@ -232,7 +240,7 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
                 _TechIcon(Icon(SimpleIcons.flutter), 'Flutter'),
                 _TechIcon(Icon(SimpleIcons.dart), 'Dart'),
                 _TechIcon(Icon(SimpleIcons.html5), 'HTML'),
-                _TechIcon(Icon(SimpleIcons.css3), 'CSS'),
+                _TechIcon(FaIcon(FontAwesomeIcons.css3), 'CSS'),
                 _TechIcon(Icon(SimpleIcons.javascript), 'JavaScript'),
               ],
             ),
@@ -240,7 +248,15 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
             const _SkillNode(
               title: 'BACKEND',
               icons: [
-                _TechIcon(Icon(FontAwesomeIcons.java, shadows: [Shadow(color: Colors.black, blurRadius: 1), Shadow(color: Colors.black, offset: Offset(0.3, 0.3))]), 'Java'),
+                _TechIcon(
+                  Stack(
+                    children: [
+                      Positioned(left: 0.5, top: 0.5, child: FaIcon(FontAwesomeIcons.java)),
+                      FaIcon(FontAwesomeIcons.java),
+                    ],
+                  ),
+                  'Java'
+                ),
                 _TechIcon(FaIcon(FontAwesomeIcons.leaf), 'Spring Boot'),
                 _TechIcon(FaIcon(FontAwesomeIcons.shieldHalved), 'Security'),
                 _TechIcon(FaIcon(FontAwesomeIcons.key), 'JWT'),
