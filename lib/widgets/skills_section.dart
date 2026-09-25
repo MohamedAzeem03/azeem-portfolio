@@ -669,10 +669,13 @@ class _TechIcon extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 12),
-        Text(
-          label,
-          textAlign: TextAlign.center,
-          style: TextStyle(fontFamily: 'Inter', fontSize: 11, color: Colors.grey.shade800),
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            label,
+            textAlign: TextAlign.center,
+            style: TextStyle(fontFamily: 'Inter', fontSize: 11, color: Colors.grey.shade800),
+          ),
         ),
       ],
     );
