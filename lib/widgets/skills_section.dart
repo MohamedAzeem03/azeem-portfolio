@@ -552,9 +552,8 @@ class _SkillNodeState extends State<_SkillNode> {
             ),
             const Spacer(),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: widget.children,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: widget.children.map((child) => Expanded(child: child)).toList(),
             ),
             const Spacer(),
           ],
@@ -610,14 +609,14 @@ class _BottomWideNodeState extends State<_BottomWideNode> {
                   ),
                   const Spacer(),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
                       _TechIcon(FaIcon(FontAwesomeIcons.gitAlt), 'Git'),
                       _TechIcon(FaIcon(FontAwesomeIcons.github), 'GitHub'),
                       _TechIcon(FaIcon(FontAwesomeIcons.docker), 'Docker'),
                       _TechIcon(FaIcon(FontAwesomeIcons.toolbox), 'Maven'),
                       _TechIcon(FaIcon(FontAwesomeIcons.rocket), 'Postman'),
-                    ],
+                    ].map((w) => Expanded(child: w)).toList(),
                   ),
                 ],
               ),
@@ -634,11 +633,11 @@ class _BottomWideNodeState extends State<_BottomWideNode> {
                   ),
                   const Spacer(),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
                       _TechIcon(FaIcon(FontAwesomeIcons.python), 'Python'),
                       _TechIcon(FaIcon(FontAwesomeIcons.c), 'C/C++'),
-                    ],
+                    ].map((w) => Expanded(child: w)).toList(),
                   ),
                 ],
               ),
@@ -685,11 +684,12 @@ class _VerticalDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 1,
-      height: 48,
-      margin: const EdgeInsets.symmetric(horizontal: 4),
-      color: Colors.grey.shade300,
+    return Center(
+      child: Container(
+        width: 1,
+        height: 48,
+        color: Colors.grey.shade300,
+      ),
     );
   }
 }
