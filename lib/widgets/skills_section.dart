@@ -20,7 +20,7 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
     // Continuous infinite loop for the arrows
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 4), // Speed of the arrows
+      duration: const Duration(seconds: 2), // Faster speed for the continuous flow
     )..repeat();
   }
 
@@ -110,7 +110,7 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
   }
 
   // ==========================================
-  // DESKTOP LAYOUT (Fixed 1200x800)
+  // DESKTOP LAYOUT (Fixed 1200x700)
   // ==========================================
   Widget _buildDesktopLayout() {
     return FittedBox(
@@ -130,84 +130,85 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
                   painter: _DesktopConnectionsPainter(progress: _controller.value),
                 ),
                 // Nodes
-                const Positioned(
+                Positioned(
                   left: 500,
                   top: 50,
                   width: 200,
                   height: 100,
-                  child: _CloudNode(title: 'AWS'),
+                  child: const _CloudNode(title: 'AWS'),
                 ),
-                const Positioned(
+                Positioned(
                   left: 0,
                   top: 250,
-                  width: 270,
+                  width: 280,
                   height: 180,
                   child: _SkillNode(
                     title: 'FRONTEND / MOBILE',
-                    icons: [
-                      _TechIcon(Icon(SimpleIcons.flutter), 'Flutter'),
-                      _TechIcon(Icon(SimpleIcons.dart), 'Dart'),
-                      _TechIcon(Icon(SimpleIcons.html5), 'HTML'),
-                      _TechIcon(FaIcon(FontAwesomeIcons.css3), 'CSS'),
-                      _TechIcon(Icon(SimpleIcons.javascript), 'JavaScript'),
+                    children: [
+                      const _TechIcon(Icon(SimpleIcons.flutter), 'Flutter'),
+                      const _TechIcon(Icon(SimpleIcons.dart), 'Dart'),
+                      const _VerticalDivider(),
+                      const _TechIcon(Icon(SimpleIcons.html5), 'HTML'),
+                      const _TechIcon(FaIcon(FontAwesomeIcons.css3), 'CSS'),
+                      const _TechIcon(Icon(SimpleIcons.javascript), 'JavaScript'),
                     ],
                   ),
                 ),
-                const Positioned(
+                Positioned(
                   left: 310,
                   top: 250,
                   width: 270,
                   height: 180,
                   child: _SkillNode(
                     title: 'BACKEND',
-                    icons: [
+                    children: [
                       _TechIcon(
                         Stack(
                           children: [
                             Positioned(left: 0.5, top: 0.5, child: FaIcon(FontAwesomeIcons.java)),
-                            FaIcon(FontAwesomeIcons.java),
+                            const FaIcon(FontAwesomeIcons.java),
                           ],
                         ),
                         'Java'
                       ),
-                      _TechIcon(FaIcon(FontAwesomeIcons.leaf), 'Spring Boot'),
-                      _TechIcon(FaIcon(FontAwesomeIcons.shieldHalved), 'Spring Security'),
-                      _TechIcon(FaIcon(FontAwesomeIcons.key), 'JWT'),
+                      const _TechIcon(FaIcon(FontAwesomeIcons.leaf), 'Spring Boot'),
+                      const _TechIcon(FaIcon(FontAwesomeIcons.shieldHalved), 'Spring Security'),
+                      const _TechIcon(FaIcon(FontAwesomeIcons.key), 'JWT'),
                     ],
                   ),
                 ),
-                const Positioned(
+                Positioned(
                   left: 620,
                   top: 250,
                   width: 230,
                   height: 180,
-                  child: _SkillNode(
+                  child: const _SkillNode(
                     title: 'DATABASE',
-                    icons: [
+                    children: [
                       _TechIcon(FaIcon(FontAwesomeIcons.database), 'PostgreSQL'),
                       _TechIcon(FaIcon(FontAwesomeIcons.server), 'SQL'),
                     ],
                   ),
                 ),
-                const Positioned(
+                Positioned(
                   left: 890,
                   top: 250,
                   width: 310,
                   height: 180,
-                  child: _SkillNode(
+                  child: const _SkillNode(
                     title: 'AI & INTEGRATION',
-                    icons: [
+                    children: [
                       _TechIcon(FaIcon(FontAwesomeIcons.brain), 'AI APIs / LLM\nIntegration'),
-                      _TechIcon(Icon(SimpleIcons.firebase), 'Firebase'),
+                      _TechIcon(FaIcon(FontAwesomeIcons.fire), 'Firebase'),
                     ],
                   ),
                 ),
-                const Positioned(
+                Positioned(
                   left: 150,
                   top: 500,
                   width: 900,
                   height: 180,
-                  child: _BottomWideNode(),
+                  child: const _BottomWideNode(),
                 ),
               ],
             );
@@ -234,38 +235,39 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
               child: _CloudNode(title: 'AWS'),
             ),
             _VerticalConnector(progress: _controller.value),
-            const _SkillNode(
+            _SkillNode(
               title: 'FRONTEND / MOBILE',
-              icons: [
-                _TechIcon(Icon(SimpleIcons.flutter), 'Flutter'),
-                _TechIcon(Icon(SimpleIcons.dart), 'Dart'),
-                _TechIcon(Icon(SimpleIcons.html5), 'HTML'),
-                _TechIcon(FaIcon(FontAwesomeIcons.css3), 'CSS'),
-                _TechIcon(Icon(SimpleIcons.javascript), 'JavaScript'),
+              children: [
+                const _TechIcon(Icon(SimpleIcons.flutter), 'Flutter'),
+                const _TechIcon(Icon(SimpleIcons.dart), 'Dart'),
+                const _VerticalDivider(),
+                const _TechIcon(Icon(SimpleIcons.html5), 'HTML'),
+                const _TechIcon(FaIcon(FontAwesomeIcons.css3), 'CSS'),
+                const _TechIcon(Icon(SimpleIcons.javascript), 'JavaScript'),
               ],
             ),
             _VerticalConnector(progress: _controller.value),
-            const _SkillNode(
+            _SkillNode(
               title: 'BACKEND',
-              icons: [
+              children: [
                 _TechIcon(
                   Stack(
                     children: [
                       Positioned(left: 0.5, top: 0.5, child: FaIcon(FontAwesomeIcons.java)),
-                      FaIcon(FontAwesomeIcons.java),
+                      const FaIcon(FontAwesomeIcons.java),
                     ],
                   ),
                   'Java'
                 ),
-                _TechIcon(FaIcon(FontAwesomeIcons.leaf), 'Spring Boot'),
-                _TechIcon(FaIcon(FontAwesomeIcons.shieldHalved), 'Security'),
-                _TechIcon(FaIcon(FontAwesomeIcons.key), 'JWT'),
+                const _TechIcon(FaIcon(FontAwesomeIcons.leaf), 'Spring Boot'),
+                const _TechIcon(FaIcon(FontAwesomeIcons.shieldHalved), 'Security'),
+                const _TechIcon(FaIcon(FontAwesomeIcons.key), 'JWT'),
               ],
             ),
             _VerticalConnector(progress: _controller.value),
             const _SkillNode(
               title: 'DATABASE',
-              icons: [
+              children: [
                 _TechIcon(FaIcon(FontAwesomeIcons.database), 'PostgreSQL'),
                 _TechIcon(FaIcon(FontAwesomeIcons.server), 'SQL'),
               ],
@@ -273,15 +275,15 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
             _VerticalConnector(progress: _controller.value),
             const _SkillNode(
               title: 'AI & INTEGRATION',
-              icons: [
+              children: [
                 _TechIcon(FaIcon(FontAwesomeIcons.brain), 'AI APIs / LLM'),
-                _TechIcon(Icon(SimpleIcons.firebase), 'Firebase'),
+                _TechIcon(FaIcon(FontAwesomeIcons.fire), 'Firebase'),
               ],
             ),
             _VerticalConnector(progress: _controller.value),
             const _SkillNode(
               title: 'DEVOPS & TOOLS',
-              icons: [
+              children: [
                 _TechIcon(FaIcon(FontAwesomeIcons.gitAlt), 'Git'),
                 _TechIcon(FaIcon(FontAwesomeIcons.github), 'GitHub'),
                 _TechIcon(FaIcon(FontAwesomeIcons.docker), 'Docker'),
@@ -292,7 +294,7 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
             _VerticalConnector(progress: _controller.value),
             const _SkillNode(
               title: 'PROGRAMMING LANGUAGES',
-              icons: [
+              children: [
                 _TechIcon(FaIcon(FontAwesomeIcons.python), 'Python'),
                 _TechIcon(FaIcon(FontAwesomeIcons.c), 'C/C++'),
               ],
@@ -367,7 +369,7 @@ class _DesktopConnectionsPainter extends CustomPainter {
 
     // 3. Frontend to Backend
     Path frontToBack = Path();
-    frontToBack.moveTo(270, 340);
+    frontToBack.moveTo(280, 340);
     frontToBack.lineTo(310, 340);
 
     // 4. Backend to Database
@@ -399,7 +401,7 @@ class _DesktopConnectionsPainter extends CustomPainter {
 }
 
 // ==========================================
-// UTILITY: DRAW DASHED LINE & ARROW
+// UTILITY: DRAW DASHED LINE & CONTINUOUS ARROWS
 // ==========================================
 void _drawDashedLineAndArrow(Canvas canvas, Path path, double progress) {
   // 1. Draw Dashed Line
@@ -410,35 +412,40 @@ void _drawDashedLineAndArrow(Canvas canvas, Path path, double progress) {
 
   PathDashPainter(dashPaint, path, dashLength: 4, dashSpace: 4).draw(canvas);
 
-  // 2. Draw Moving Arrow
+  // 2. Draw Moving Arrows continuously along the line
+  double arrowSpacing = 70.0; 
+  double shift = progress * arrowSpacing;
+
   for (PathMetric metric in path.computeMetrics()) {
-    double distance = metric.length * progress;
-    Tangent? tangent = metric.getTangentForOffset(distance);
-    if (tangent != null) {
-      canvas.save();
-      canvas.translate(tangent.position.dx, tangent.position.dy);
-      // Math.atan2 returns angle in radians
-      canvas.rotate(math.atan2(tangent.vector.dy, tangent.vector.dx));
+    // Draw arrows spaced by `arrowSpacing`
+    double d = shift;
+    while (d < metric.length) {
+      Tangent? tangent = metric.getTangentForOffset(d);
+      if (tangent != null) {
+        canvas.save();
+        canvas.translate(tangent.position.dx, tangent.position.dy);
+        canvas.rotate(math.atan2(tangent.vector.dy, tangent.vector.dx));
 
-      // Draw small black arrow head
-      Path arrowPath = Path();
-      arrowPath.moveTo(6, 0);
-      arrowPath.lineTo(-4, 4);
-      arrowPath.lineTo(-2, 0);
-      arrowPath.lineTo(-4, -4);
-      arrowPath.close();
+        // Draw small black arrow head
+        Path arrowPath = Path();
+        arrowPath.moveTo(5, 0);
+        arrowPath.lineTo(-3, 3);
+        arrowPath.lineTo(-1, 0);
+        arrowPath.lineTo(-3, -3);
+        arrowPath.close();
 
-      Paint arrowPaint = Paint()
-        ..color = Colors.black
-        ..style = PaintingStyle.fill;
+        Paint arrowPaint = Paint()
+          ..color = Colors.black
+          ..style = PaintingStyle.fill;
 
-      canvas.drawPath(arrowPath, arrowPaint);
-      canvas.restore();
+        canvas.drawPath(arrowPath, arrowPaint);
+        canvas.restore();
+      }
+      d += arrowSpacing;
     }
   }
 }
 
-// Custom Dashed Path implementation
 class PathDashPainter {
   final Paint linePaint;
   final Path path;
@@ -508,9 +515,9 @@ class _CloudNodeState extends State<_CloudNode> {
 
 class _SkillNode extends StatefulWidget {
   final String title;
-  final List<_TechIcon> icons;
+  final List<Widget> children;
 
-  const _SkillNode({required this.title, required this.icons});
+  const _SkillNode({required this.title, required this.children});
 
   @override
   State<_SkillNode> createState() => _SkillNodeState();
@@ -526,7 +533,7 @@ class _SkillNodeState extends State<_SkillNode> {
       onExit: (_) => setState(() => _isHovered = false),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
         margin: EdgeInsets.only(top: _isHovered ? 0 : 5, bottom: _isHovered ? 5 : 0),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -547,30 +554,13 @@ class _SkillNodeState extends State<_SkillNode> {
             const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: widget.icons.map((e) => _buildIcon(e)).toList(),
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: widget.children,
             ),
             const Spacer(),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildIcon(_TechIcon t) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        IconTheme(
-          data: IconThemeData(color: Colors.grey.shade900, size: 28),
-          child: t.icon,
-        ),
-        const SizedBox(height: 12),
-        Text(
-          t.label,
-          textAlign: TextAlign.center,
-          style: TextStyle(fontFamily: 'Inter', fontSize: 11, color: Colors.grey.shade800),
-        ),
-      ],
     );
   }
 }
@@ -622,12 +612,12 @@ class _BottomWideNodeState extends State<_BottomWideNode> {
                   const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      _buildIcon(const _TechIcon(FaIcon(FontAwesomeIcons.gitAlt), 'Git')),
-                      _buildIcon(const _TechIcon(FaIcon(FontAwesomeIcons.github), 'GitHub')),
-                      _buildIcon(const _TechIcon(FaIcon(FontAwesomeIcons.docker), 'Docker')),
-                      _buildIcon(const _TechIcon(FaIcon(FontAwesomeIcons.toolbox), 'Maven')),
-                      _buildIcon(const _TechIcon(FaIcon(FontAwesomeIcons.rocket), 'Postman')),
+                    children: const [
+                      _TechIcon(FaIcon(FontAwesomeIcons.gitAlt), 'Git'),
+                      _TechIcon(FaIcon(FontAwesomeIcons.github), 'GitHub'),
+                      _TechIcon(FaIcon(FontAwesomeIcons.docker), 'Docker'),
+                      _TechIcon(FaIcon(FontAwesomeIcons.toolbox), 'Maven'),
+                      _TechIcon(FaIcon(FontAwesomeIcons.rocket), 'Postman'),
                     ],
                   ),
                 ],
@@ -646,9 +636,9 @@ class _BottomWideNodeState extends State<_BottomWideNode> {
                   const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      _buildIcon(const _TechIcon(FaIcon(FontAwesomeIcons.python), 'Python')),
-                      _buildIcon(const _TechIcon(FaIcon(FontAwesomeIcons.c), 'C/C++')),
+                    children: const [
+                      _TechIcon(FaIcon(FontAwesomeIcons.python), 'Python'),
+                      _TechIcon(FaIcon(FontAwesomeIcons.c), 'C/C++'),
                     ],
                   ),
                 ],
@@ -659,18 +649,30 @@ class _BottomWideNodeState extends State<_BottomWideNode> {
       ),
     );
   }
+}
 
-  Widget _buildIcon(_TechIcon t) {
+class _TechIcon extends StatelessWidget {
+  final Widget icon;
+  final String label;
+  const _TechIcon(this.icon, this.label);
+
+  @override
+  Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        IconTheme(
-          data: IconThemeData(color: Colors.grey.shade900, size: 28),
-          child: t.icon,
+        SizedBox(
+          height: 32,
+          child: Center(
+            child: IconTheme(
+              data: IconThemeData(color: Colors.grey.shade900, size: 28),
+              child: icon,
+            ),
+          ),
         ),
         const SizedBox(height: 12),
         Text(
-          t.label,
+          label,
           textAlign: TextAlign.center,
           style: TextStyle(fontFamily: 'Inter', fontSize: 11, color: Colors.grey.shade800),
         ),
@@ -679,8 +681,16 @@ class _BottomWideNodeState extends State<_BottomWideNode> {
   }
 }
 
-class _TechIcon {
-  final Widget icon;
-  final String label;
-  const _TechIcon(this.icon, this.label);
+class _VerticalDivider extends StatelessWidget {
+  const _VerticalDivider();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 1,
+      height: 48,
+      margin: const EdgeInsets.symmetric(horizontal: 4),
+      color: Colors.grey.shade300,
+    );
+  }
 }
