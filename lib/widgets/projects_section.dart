@@ -222,14 +222,17 @@ class ProjectsSection extends StatelessWidget {
   }
 
   Widget _buildCaseStudyButton(BuildContext context, CaseStudy caseStudy) {
-    return _HoverButton(
-      text: 'View Case Study',
-      onPressed: () {
-        showDialog(
-          context: context,
-          builder: (context) => CaseStudyModal(caseStudy: caseStudy),
-        );
-      },
+    return Align(
+      alignment: Alignment.centerRight,
+      child: _HoverButton(
+        text: 'View Case Study',
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) => CaseStudyModal(caseStudy: caseStudy),
+          );
+        },
+      ),
     );
   }
 }
@@ -260,10 +263,10 @@ class _HoverButtonState extends State<_HoverButton> {
           curve: Curves.easeInOutSine,
           padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
           decoration: BoxDecoration(
-            color: _isHovered ? Colors.black : Colors.transparent,
+            color: _isHovered ? Colors.transparent : Colors.black,
             borderRadius: BorderRadius.circular(24),
             border: Border.all(
-              color: _isHovered ? Colors.black : Colors.grey.shade300,
+              color: _isHovered ? Colors.grey.shade400 : Colors.black,
             ),
           ),
           child: Row(
@@ -275,14 +278,14 @@ class _HoverButtonState extends State<_HoverButton> {
                 style: TextStyle(
                   fontFamily: 'DM Mono',
                   fontSize: 12,
-                  color: _isHovered ? Colors.white : Colors.black,
+                  color: _isHovered ? Colors.black : Colors.white,
                 ),
                 child: Text('${widget.text} '),
               ),
               TweenAnimationBuilder<Color?>(
                 tween: ColorTween(
-                  begin: Colors.black,
-                  end: _isHovered ? Colors.white : Colors.black,
+                  begin: Colors.white,
+                  end: _isHovered ? Colors.black : Colors.white,
                 ),
                 duration: const Duration(milliseconds: 250),
                 curve: Curves.easeInOutSine,
