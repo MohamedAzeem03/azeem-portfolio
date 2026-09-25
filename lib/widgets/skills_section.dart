@@ -131,7 +131,7 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
                 ),
                 // Nodes
                 Positioned(
-                  left: 500,
+                  left: 578,
                   top: 50,
                   width: 200,
                   height: 100,
@@ -355,15 +355,15 @@ class _DesktopConnectionsPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     // 1. AWS to Backend
     Path awsToBackend = Path();
-    awsToBackend.moveTo(600, 150);
-    awsToBackend.lineTo(600, 200);
+    awsToBackend.moveTo(678, 150);
+    awsToBackend.lineTo(678, 200);
     awsToBackend.lineTo(535, 200);
     awsToBackend.lineTo(535, 250);
 
     // 2. AWS to Database
     Path awsToDatabase = Path();
-    awsToDatabase.moveTo(600, 150);
-    awsToDatabase.lineTo(600, 200);
+    awsToDatabase.moveTo(678, 150);
+    awsToDatabase.lineTo(678, 200);
     awsToDatabase.lineTo(820, 200);
     awsToDatabase.lineTo(820, 250);
 
