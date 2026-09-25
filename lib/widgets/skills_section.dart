@@ -20,8 +20,9 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
     // Continuous infinite loop for the arrows
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 5), // Calmer, professional speed
-    )..repeat();
+      duration: const Duration(seconds: 1000000), // Acts as a continuous timer
+      upperBound: 1000000.0,
+    )..forward();
   }
 
   @override
@@ -414,8 +415,8 @@ void _drawDashedLineAndArrow(Canvas canvas, Path path, double progress) {
 
   // 2. Draw Moving Arrow (One per line, constant speed, smooth fade in/out)
   for (PathMetric metric in path.computeMetrics()) {
-    // 400 pixels per cycle over 5 seconds = 80 pixels/second (very smooth, professional)
-    double distance = (progress * 400) % metric.length;
+    // progress is elapsed time in seconds. Speed is 80 pixels/second.
+    double distance = (progress * 80.0) % metric.length;
     
     Tangent? tangent = metric.getTangentForOffset(distance);
     if (tangent != null) {
