@@ -140,7 +140,7 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
                 Positioned(
                   left: 0,
                   top: 250,
-                  width: 280,
+                  width: 350,
                   height: 180,
                   child: _SkillNode(
                     title: 'FRONTEND / MOBILE',
@@ -155,9 +155,9 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
                   ),
                 ),
                 Positioned(
-                  left: 310,
+                  left: 390,
                   top: 250,
-                  width: 270,
+                  width: 290,
                   height: 180,
                   child: _SkillNode(
                     title: 'BACKEND',
@@ -178,9 +178,9 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
                   ),
                 ),
                 Positioned(
-                  left: 620,
+                  left: 720,
                   top: 250,
-                  width: 230,
+                  width: 200,
                   height: 180,
                   child: const _SkillNode(
                     title: 'DATABASE',
@@ -191,9 +191,9 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
                   ),
                 ),
                 Positioned(
-                  left: 890,
+                  left: 960,
                   top: 250,
-                  width: 310,
+                  width: 240,
                   height: 180,
                   child: const _SkillNode(
                     title: 'AI & INTEGRATION',
@@ -357,35 +357,35 @@ class _DesktopConnectionsPainter extends CustomPainter {
     Path awsToBackend = Path();
     awsToBackend.moveTo(600, 150);
     awsToBackend.lineTo(600, 200);
-    awsToBackend.lineTo(445, 200);
-    awsToBackend.lineTo(445, 250);
+    awsToBackend.lineTo(535, 200);
+    awsToBackend.lineTo(535, 250);
 
     // 2. AWS to Database
     Path awsToDatabase = Path();
     awsToDatabase.moveTo(600, 150);
     awsToDatabase.lineTo(600, 200);
-    awsToDatabase.lineTo(735, 200);
-    awsToDatabase.lineTo(735, 250);
+    awsToDatabase.lineTo(820, 200);
+    awsToDatabase.lineTo(820, 250);
 
     // 3. Frontend to Backend
     Path frontToBack = Path();
-    frontToBack.moveTo(280, 340);
-    frontToBack.lineTo(310, 340);
+    frontToBack.moveTo(350, 340);
+    frontToBack.lineTo(390, 340);
 
     // 4. Backend to Database
     Path backToDb = Path();
-    backToDb.moveTo(580, 340);
-    backToDb.lineTo(620, 340);
+    backToDb.moveTo(680, 340);
+    backToDb.lineTo(720, 340);
 
     // 5. Database to AI
     Path dbToAi = Path();
-    dbToAi.moveTo(850, 340);
-    dbToAi.lineTo(890, 340);
+    dbToAi.moveTo(920, 340);
+    dbToAi.lineTo(960, 340);
 
     // 6. Backend to DevOps (bottom row)
     Path backToDevops = Path();
-    backToDevops.moveTo(445, 430);
-    backToDevops.lineTo(445, 500);
+    backToDevops.moveTo(535, 430);
+    backToDevops.lineTo(535, 500);
 
     // Draw all paths and arrows
     _drawDashedLineAndArrow(canvas, awsToBackend, progress);
