@@ -415,8 +415,8 @@ void _drawDashedLineAndArrow(Canvas canvas, Path path, double progress) {
 
   // 2. Draw Moving Arrow (One per line, constant speed, smooth fade in/out)
   for (PathMetric metric in path.computeMetrics()) {
-    // progress is elapsed time in seconds. Speed is 150 pixels/second.
-    double distance = (progress * 150.0) % metric.length;
+    // progress is elapsed time in seconds. Speed is 100 pixels/second.
+    double distance = (progress * 100.0) % metric.length;
     
     Tangent? tangent = metric.getTangentForOffset(distance);
     if (tangent != null) {
