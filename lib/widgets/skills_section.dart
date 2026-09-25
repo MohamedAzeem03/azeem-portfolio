@@ -80,11 +80,11 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
                 ),
             ],
           ),
-          const SizedBox(height: 80),
+          const SizedBox(height: 24),
           Center(
             child: isMobile ? _buildMobileLayout() : _buildDesktopLayout(),
           ),
-          const SizedBox(height: 80),
+          const SizedBox(height: 32),
           Row(
             children: [
               Container(width: 24, height: 1, color: Colors.black),
@@ -116,7 +116,7 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
       fit: BoxFit.scaleDown,
       child: SizedBox(
         width: 1200,
-        height: 800,
+        height: 700,
         child: AnimatedBuilder(
           animation: _controller,
           builder: (context, child) {
@@ -125,7 +125,7 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
               children: [
                 // Paint the paths and arrows in the background
                 CustomPaint(
-                  size: const Size(1200, 800),
+                  size: const Size(1200, 700),
                   painter: _DesktopConnectionsPainter(progress: _controller.value),
                 ),
                 // Nodes
