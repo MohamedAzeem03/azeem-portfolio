@@ -1,141 +1,669 @@
+import 'dart:math' as math;
+import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-
-class SkillsSection extends StatelessWidget {
+class SkillsSection extends StatefulWidget {
   const SkillsSection({super.key});
 
   @override
+  State<SkillsSection> createState() => _SkillsSectionState();
+}
+
+class _SkillsSectionState extends State<SkillsSection> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    // Continuous infinite loop for the arrows
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 4), // Speed of the arrows
+    )..repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    bool isMobile = MediaQuery.of(context).size.width < 768;
+    bool isMobile = MediaQuery.of(context).size.width < 1100;
+
     return Container(
+      width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 80),
       decoration: const BoxDecoration(
+        color: Color(0xFFFAFAFA),
         border: Border(bottom: BorderSide(color: Color(0xFFE5E5E5))),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            '01 / SKILLS',
-            style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500, letterSpacing: 1.5),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'My Skills',
-            style: TextStyle(fontFamily: 'Cormorant Garamond', fontSize: 48, color: Colors.black),
-          ),
-          Text(
-            'Technologies & Tools • Academic & Project Experience',
-            style: TextStyle(fontFamily: 'DM Mono', fontSize: 14, color: Colors.grey.shade600),
-          ),
-          const SizedBox(height: 40),
-          Container(
-            padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              color: const Color(0xFF0a0a0a),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: isMobile
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: _buildBannerContent(),
-                  )
-                : Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: _buildBannerContent(),
-                  ),
-          ),
-          const SizedBox(height: 40),
-          SizedBox(
-            width: double.infinity,
-            child: Wrap(
-              alignment: WrapAlignment.center,
-              spacing: 24,
-              runSpacing: 24,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              _buildSkillCard('Frontend / Mobile', 'Platform', ['Flutter', 'Dart', 'Responsive UI/UX', 'Cross-Platform']),
-              _buildSkillCard('Backend', 'Engine', ['Java', 'Spring Boot', 'REST APIs', 'Maven Build Tool']),
-              _buildSkillCard('Database', 'Storage', ['PostgreSQL', 'SQL / Relational Queries', 'Database Schema Design', 'Data Normalization']),
-              _buildSkillCard('Security & Auth', 'Integrity', ['Spring Security', 'JSON Web Tokens (JWT)', 'Role-Based Access (RBAC)', 'Password Encryption']),
-              _buildSkillCard('Tools', 'Workflow', ['Git & GitHub', 'Postman', 'VS Code & IntelliJ IDEA', 'Android Studio']),
-              _buildSkillCard('Cloud & DevOps', 'Infrastructure', ['Docker Basics', 'AWS Fundamentals', 'Linux Command Line', 'Cloud Infrastructure']),
-              _buildSkillCard('AI & Protocols', 'Modern Protocols', ['JSON / HTTP / HTTPS', 'AI APIs & LLM Integrations', 'Firebase Essentials', 'Third-Party Webhooks']),
-              _buildSkillCard('Languages', 'Foundations', ['C / C++', 'Python', 'HTML & CSS', 'JavaScript']),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '// 01 SKILLS',
+                    style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500, letterSpacing: 1.5),
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'My Skills',
+                    style: TextStyle(fontFamily: 'Cormorant Garamond', fontSize: 48, color: Colors.black),
+                  ),
+                  const SizedBox(height: 12),
+                  Row(
+                    children: [
+                      Container(width: 24, height: 1, color: Colors.black),
+                      const SizedBox(width: 16),
+                      Text(
+                        'Technologies I use to build modern, scalable\nand user-friendly applications.',
+                        style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade600, height: 1.6),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              if (!isMobile)
+                Text(
+                  'Clean code. Scalable systems.\nReal world impact.',
+                  textAlign: TextAlign.right,
+                  style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500, height: 1.6),
+                ),
             ],
           ),
+          const SizedBox(height: 80),
+          Center(
+            child: isMobile ? _buildMobileLayout() : _buildDesktopLayout(),
+          ),
+          const SizedBox(height: 80),
+          Row(
+            children: [
+              Container(width: 24, height: 1, color: Colors.black),
+              const SizedBox(width: 16),
+              Text(
+                'Technology  ×  Problem Solving  ×  Better Solutions',
+                style: TextStyle(fontFamily: 'DM Mono', fontSize: 10, color: Colors.grey.shade400, letterSpacing: 1.5),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 16),
+                  child: Container(height: 1, color: Colors.grey.shade200),
+                ),
+              ),
+              const SizedBox(width: 16),
+              Container(width: 48, height: 1, color: Colors.grey.shade300),
+            ],
           ),
         ],
       ),
     );
   }
 
-  List<Widget> _buildBannerContent() {
-    return [
-      Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'PRIMARY CORE STACK',
-            style: TextStyle(fontFamily: 'DM Mono', fontSize: 10, color: Colors.grey.shade400, letterSpacing: 1.5),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'Java + Spring Boot + Flutter + Dart + REST APIs + PostgreSQL',
-            style: TextStyle(fontFamily: 'Cormorant Garamond', fontSize: 20, color: Colors.white),
-          ),
-        ],
-      ),
-      Container(
-        margin: const EdgeInsets.only(top: 16),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        decoration: BoxDecoration(
-          color: Colors.grey.shade900,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: Colors.grey.shade800),
+  // ==========================================
+  // DESKTOP LAYOUT (Fixed 1200x800)
+  // ==========================================
+  Widget _buildDesktopLayout() {
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      child: SizedBox(
+        width: 1200,
+        height: 800,
+        child: AnimatedBuilder(
+          animation: _controller,
+          builder: (context, child) {
+            return Stack(
+              clipBehavior: Clip.none,
+              children: [
+                // Paint the paths and arrows in the background
+                CustomPaint(
+                  size: const Size(1200, 800),
+                  painter: _DesktopConnectionsPainter(progress: _controller.value),
+                ),
+                // Nodes
+                const Positioned(
+                  left: 500,
+                  top: 50,
+                  width: 200,
+                  height: 100,
+                  child: _CloudNode(title: 'AWS'),
+                ),
+                const Positioned(
+                  left: 0,
+                  top: 250,
+                  width: 270,
+                  height: 180,
+                  child: _SkillNode(
+                    title: 'FRONTEND / MOBILE',
+                    icons: [
+                      _TechIcon(FaIcon(FontAwesomeIcons.mobileButton), 'Flutter'),
+                      _TechIcon(FaIcon(FontAwesomeIcons.code), 'Dart'),
+                      _TechIcon(FaIcon(FontAwesomeIcons.html5), 'HTML'),
+                      _TechIcon(FaIcon(FontAwesomeIcons.css3), 'CSS'),
+                      _TechIcon(FaIcon(FontAwesomeIcons.js), 'JavaScript'),
+                    ],
+                  ),
+                ),
+                const Positioned(
+                  left: 310,
+                  top: 250,
+                  width: 270,
+                  height: 180,
+                  child: _SkillNode(
+                    title: 'BACKEND',
+                    icons: [
+                      _TechIcon(FaIcon(FontAwesomeIcons.java), 'Java'),
+                      _TechIcon(FaIcon(FontAwesomeIcons.leaf), 'Spring Boot'),
+                      _TechIcon(FaIcon(FontAwesomeIcons.shieldHalved), 'Spring Security'),
+                      _TechIcon(FaIcon(FontAwesomeIcons.key), 'JWT'),
+                    ],
+                  ),
+                ),
+                const Positioned(
+                  left: 620,
+                  top: 250,
+                  width: 230,
+                  height: 180,
+                  child: _SkillNode(
+                    title: 'DATABASE',
+                    icons: [
+                      _TechIcon(FaIcon(FontAwesomeIcons.database), 'PostgreSQL'),
+                      _TechIcon(FaIcon(FontAwesomeIcons.server), 'SQL'),
+                    ],
+                  ),
+                ),
+                const Positioned(
+                  left: 890,
+                  top: 250,
+                  width: 310,
+                  height: 180,
+                  child: _SkillNode(
+                    title: 'AI & INTEGRATION',
+                    icons: [
+                      _TechIcon(FaIcon(FontAwesomeIcons.brain), 'AI APIs / LLM\nIntegration'),
+                      _TechIcon(FaIcon(FontAwesomeIcons.fire), 'Firebase'),
+                    ],
+                  ),
+                ),
+                const Positioned(
+                  left: 150,
+                  top: 500,
+                  width: 900,
+                  height: 180,
+                  child: _BottomWideNode(),
+                ),
+              ],
+            );
+          },
         ),
-        child: Text(
-          'Cross-Platform & Backend Engineering',
-          style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade300),
-        ),
       ),
-    ];
+    );
   }
 
-  Widget _buildSkillCard(String title, String subtitle, List<String> items) {
-    return Container(
-      width: 300,
-      padding: const EdgeInsets.all(24),
-      decoration: BoxDecoration(
-        color: const Color(0xFFF7F7F7),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.grey.shade200),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            subtitle.toUpperCase(),
-            style: TextStyle(fontFamily: 'DM Mono', fontSize: 11, color: Colors.grey.shade500, letterSpacing: 1.5),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            title,
-            style: TextStyle(fontFamily: 'Cormorant Garamond', fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
-          ),
-          const SizedBox(height: 16),
-          ...items.map((item) => Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: Row(
-              children: [
-                Container(width: 6, height: 6, decoration: BoxDecoration(color: Colors.grey.shade400, shape: BoxShape.circle)),
-                const SizedBox(width: 8),
-                Expanded(child: Text(item, style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade700))),
+  // ==========================================
+  // MOBILE LAYOUT (Vertical flow)
+  // ==========================================
+  Widget _buildMobileLayout() {
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(
+              width: 200,
+              height: 100,
+              child: _CloudNode(title: 'AWS'),
+            ),
+            _VerticalConnector(progress: _controller.value),
+            const _SkillNode(
+              title: 'FRONTEND / MOBILE',
+              icons: [
+                _TechIcon(FaIcon(FontAwesomeIcons.mobileButton), 'Flutter'),
+                _TechIcon(FaIcon(FontAwesomeIcons.code), 'Dart'),
+                _TechIcon(FaIcon(FontAwesomeIcons.html5), 'HTML'),
+                _TechIcon(FaIcon(FontAwesomeIcons.css3), 'CSS'),
+                _TechIcon(FaIcon(FontAwesomeIcons.js), 'JavaScript'),
               ],
             ),
-          )).toList(),
-        ],
+            _VerticalConnector(progress: _controller.value),
+            const _SkillNode(
+              title: 'BACKEND',
+              icons: [
+                _TechIcon(FaIcon(FontAwesomeIcons.java), 'Java'),
+                _TechIcon(FaIcon(FontAwesomeIcons.leaf), 'Spring Boot'),
+                _TechIcon(FaIcon(FontAwesomeIcons.shieldHalved), 'Security'),
+                _TechIcon(FaIcon(FontAwesomeIcons.key), 'JWT'),
+              ],
+            ),
+            _VerticalConnector(progress: _controller.value),
+            const _SkillNode(
+              title: 'DATABASE',
+              icons: [
+                _TechIcon(FaIcon(FontAwesomeIcons.database), 'PostgreSQL'),
+                _TechIcon(FaIcon(FontAwesomeIcons.server), 'SQL'),
+              ],
+            ),
+            _VerticalConnector(progress: _controller.value),
+            const _SkillNode(
+              title: 'AI & INTEGRATION',
+              icons: [
+                _TechIcon(FaIcon(FontAwesomeIcons.brain), 'AI APIs / LLM'),
+                _TechIcon(FaIcon(FontAwesomeIcons.fire), 'Firebase'),
+              ],
+            ),
+            _VerticalConnector(progress: _controller.value),
+            const _SkillNode(
+              title: 'DEVOPS & TOOLS',
+              icons: [
+                _TechIcon(FaIcon(FontAwesomeIcons.gitAlt), 'Git'),
+                _TechIcon(FaIcon(FontAwesomeIcons.github), 'GitHub'),
+                _TechIcon(FaIcon(FontAwesomeIcons.docker), 'Docker'),
+                _TechIcon(FaIcon(FontAwesomeIcons.toolbox), 'Maven'),
+                _TechIcon(FaIcon(FontAwesomeIcons.rocket), 'Postman'),
+              ],
+            ),
+            _VerticalConnector(progress: _controller.value),
+            const _SkillNode(
+              title: 'PROGRAMMING LANGUAGES',
+              icons: [
+                _TechIcon(FaIcon(FontAwesomeIcons.python), 'Python'),
+                _TechIcon(FaIcon(FontAwesomeIcons.c), 'C/C++'),
+              ],
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+// ==========================================
+// VERTICAL CONNECTOR FOR MOBILE
+// ==========================================
+class _VerticalConnector extends StatelessWidget {
+  final double progress;
+
+  const _VerticalConnector({required this.progress});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 40,
+      height: 40,
+      child: CustomPaint(
+        painter: _MobileVerticalPainter(progress: progress),
       ),
     );
   }
 }
 
+class _MobileVerticalPainter extends CustomPainter {
+  final double progress;
+  _MobileVerticalPainter({required this.progress});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    Path path = Path();
+    path.moveTo(size.width / 2, 0);
+    path.lineTo(size.width / 2, size.height);
+
+    _drawDashedLineAndArrow(canvas, path, progress);
+  }
+
+  @override
+  bool shouldRepaint(covariant _MobileVerticalPainter oldDelegate) => oldDelegate.progress != progress;
+}
+
+// ==========================================
+// DESKTOP PATH PAINTER
+// ==========================================
+class _DesktopConnectionsPainter extends CustomPainter {
+  final double progress;
+
+  _DesktopConnectionsPainter({required this.progress});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    // 1. AWS to Backend
+    Path awsToBackend = Path();
+    awsToBackend.moveTo(600, 150);
+    awsToBackend.lineTo(600, 200);
+    awsToBackend.lineTo(445, 200);
+    awsToBackend.lineTo(445, 250);
+
+    // 2. AWS to Database
+    Path awsToDatabase = Path();
+    awsToDatabase.moveTo(600, 150);
+    awsToDatabase.lineTo(600, 200);
+    awsToDatabase.lineTo(735, 200);
+    awsToDatabase.lineTo(735, 250);
+
+    // 3. Frontend to Backend
+    Path frontToBack = Path();
+    frontToBack.moveTo(270, 340);
+    frontToBack.lineTo(310, 340);
+
+    // 4. Backend to Database
+    Path backToDb = Path();
+    backToDb.moveTo(580, 340);
+    backToDb.lineTo(620, 340);
+
+    // 5. Database to AI
+    Path dbToAi = Path();
+    dbToAi.moveTo(850, 340);
+    dbToAi.lineTo(890, 340);
+
+    // 6. Backend to DevOps (bottom row)
+    Path backToDevops = Path();
+    backToDevops.moveTo(445, 430);
+    backToDevops.lineTo(445, 500);
+
+    // Draw all paths and arrows
+    _drawDashedLineAndArrow(canvas, awsToBackend, progress);
+    _drawDashedLineAndArrow(canvas, awsToDatabase, progress);
+    _drawDashedLineAndArrow(canvas, frontToBack, progress);
+    _drawDashedLineAndArrow(canvas, backToDb, progress);
+    _drawDashedLineAndArrow(canvas, dbToAi, progress);
+    _drawDashedLineAndArrow(canvas, backToDevops, progress);
+  }
+
+  @override
+  bool shouldRepaint(covariant _DesktopConnectionsPainter oldDelegate) => oldDelegate.progress != progress;
+}
+
+// ==========================================
+// UTILITY: DRAW DASHED LINE & ARROW
+// ==========================================
+void _drawDashedLineAndArrow(Canvas canvas, Path path, double progress) {
+  // 1. Draw Dashed Line
+  Paint dashPaint = Paint()
+    ..color = Colors.grey.shade400
+    ..strokeWidth = 1.5
+    ..style = PaintingStyle.stroke;
+
+  PathDashPainter(dashPaint, path, dashLength: 4, dashSpace: 4).draw(canvas);
+
+  // 2. Draw Moving Arrow
+  for (PathMetric metric in path.computeMetrics()) {
+    double distance = metric.length * progress;
+    Tangent? tangent = metric.getTangentForOffset(distance);
+    if (tangent != null) {
+      canvas.save();
+      canvas.translate(tangent.position.dx, tangent.position.dy);
+      // Math.atan2 returns angle in radians
+      canvas.rotate(math.atan2(tangent.vector.dy, tangent.vector.dx));
+
+      // Draw small black arrow head
+      Path arrowPath = Path();
+      arrowPath.moveTo(6, 0);
+      arrowPath.lineTo(-4, 4);
+      arrowPath.lineTo(-2, 0);
+      arrowPath.lineTo(-4, -4);
+      arrowPath.close();
+
+      Paint arrowPaint = Paint()
+        ..color = Colors.black
+        ..style = PaintingStyle.fill;
+
+      canvas.drawPath(arrowPath, arrowPaint);
+      canvas.restore();
+    }
+  }
+}
+
+// Custom Dashed Path implementation
+class PathDashPainter {
+  final Paint linePaint;
+  final Path path;
+  final double dashLength;
+  final double dashSpace;
+
+  PathDashPainter(this.linePaint, this.path, {this.dashLength = 5, this.dashSpace = 5});
+
+  void draw(Canvas canvas) {
+    for (PathMetric metric in path.computeMetrics()) {
+      double distance = 0.0;
+      while (distance < metric.length) {
+        Path extractPath = metric.extractPath(distance, distance + dashLength);
+        canvas.drawPath(extractPath, linePaint);
+        distance += dashLength + dashSpace;
+      }
+    }
+  }
+}
+
+// ==========================================
+// NODE WIDGETS
+// ==========================================
+class _CloudNode extends StatefulWidget {
+  final String title;
+  const _CloudNode({required this.title});
+
+  @override
+  State<_CloudNode> createState() => _CloudNodeState();
+}
+
+class _CloudNodeState extends State<_CloudNode> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        margin: EdgeInsets.only(top: _isHovered ? 0 : 5, bottom: _isHovered ? 5 : 0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(50),
+          border: Border.all(color: _isHovered ? Colors.black : Colors.grey.shade300, width: _isHovered ? 2 : 1),
+          boxShadow: [
+            if (_isHovered)
+              BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 15, offset: const Offset(0, 10))
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FaIcon(FontAwesomeIcons.aws, size: 40, color: Colors.grey.shade900),
+            const SizedBox(height: 4),
+            Text(
+              widget.title,
+              style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey.shade800),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SkillNode extends StatefulWidget {
+  final String title;
+  final List<_TechIcon> icons;
+
+  const _SkillNode({required this.title, required this.icons});
+
+  @override
+  State<_SkillNode> createState() => _SkillNodeState();
+}
+
+class _SkillNodeState extends State<_SkillNode> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.all(24),
+        margin: EdgeInsets.only(top: _isHovered ? 0 : 5, bottom: _isHovered ? 5 : 0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: _isHovered ? Colors.black54 : Colors.grey.shade300),
+          boxShadow: [
+            if (_isHovered)
+              BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 20, offset: const Offset(0, 10))
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              widget.title,
+              style: TextStyle(fontFamily: 'DM Mono', fontSize: 11, color: Colors.grey.shade500, letterSpacing: 1.5),
+            ),
+            const Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: widget.icons.map((e) => _buildIcon(e)).toList(),
+            ),
+            const Spacer(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildIcon(_TechIcon t) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        IconTheme(
+          data: IconThemeData(color: Colors.grey.shade900, size: 28),
+          child: t.icon,
+        ),
+        const SizedBox(height: 12),
+        Text(
+          t.label,
+          textAlign: TextAlign.center,
+          style: TextStyle(fontFamily: 'Inter', fontSize: 11, color: Colors.grey.shade800),
+        ),
+      ],
+    );
+  }
+}
+
+class _BottomWideNode extends StatefulWidget {
+  const _BottomWideNode();
+
+  @override
+  State<_BottomWideNode> createState() => _BottomWideNodeState();
+}
+
+class _BottomWideNodeState extends State<_BottomWideNode> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.all(32),
+        margin: EdgeInsets.only(top: _isHovered ? 0 : 5, bottom: _isHovered ? 5 : 0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: _isHovered ? Colors.black54 : Colors.grey.shade300),
+          boxShadow: [
+            if (_isHovered)
+              BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 20, offset: const Offset(0, 10))
+          ],
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 6,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'DEVOPS & TOOLS',
+                    style: TextStyle(fontFamily: 'DM Mono', fontSize: 11, color: Colors.grey.shade500, letterSpacing: 1.5),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Build  •  Deploy  •  Manage',
+                    style: TextStyle(fontFamily: 'Inter', fontSize: 12, color: Colors.grey.shade400),
+                  ),
+                  const Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _buildIcon(const _TechIcon(FaIcon(FontAwesomeIcons.gitAlt), 'Git')),
+                      _buildIcon(const _TechIcon(FaIcon(FontAwesomeIcons.github), 'GitHub')),
+                      _buildIcon(const _TechIcon(FaIcon(FontAwesomeIcons.docker), 'Docker')),
+                      _buildIcon(const _TechIcon(FaIcon(FontAwesomeIcons.toolbox), 'Maven')),
+                      _buildIcon(const _TechIcon(FaIcon(FontAwesomeIcons.rocket), 'Postman')),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Container(width: 1, color: Colors.grey.shade200, margin: const EdgeInsets.symmetric(horizontal: 32)),
+            Expanded(
+              flex: 3,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'PROGRAMMING LANGUAGES',
+                    style: TextStyle(fontFamily: 'DM Mono', fontSize: 11, color: Colors.grey.shade500, letterSpacing: 1.5),
+                  ),
+                  const Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _buildIcon(const _TechIcon(FaIcon(FontAwesomeIcons.python), 'Python')),
+                      _buildIcon(const _TechIcon(FaIcon(FontAwesomeIcons.c), 'C/C++')),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildIcon(_TechIcon t) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        IconTheme(
+          data: IconThemeData(color: Colors.grey.shade900, size: 28),
+          child: t.icon,
+        ),
+        const SizedBox(height: 12),
+        Text(
+          t.label,
+          textAlign: TextAlign.center,
+          style: TextStyle(fontFamily: 'Inter', fontSize: 11, color: Colors.grey.shade800),
+        ),
+      ],
+    );
+  }
+}
+
+class _TechIcon {
+  final Widget icon;
+  final String label;
+  const _TechIcon(this.icon, this.label);
+}
