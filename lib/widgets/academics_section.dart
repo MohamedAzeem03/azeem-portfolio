@@ -22,8 +22,14 @@ class AcademicsSection extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'Education',
-            style: TextStyle(fontFamily: 'Cormorant Garamond', fontSize: 48, color: Colors.black),
+            'EDUCATION',
+            style: TextStyle(
+              fontFamily: 'Cormorant Garamond', 
+              fontSize: isMobile ? 42 : 64, 
+              fontWeight: FontWeight.w900, 
+              color: Colors.black,
+              letterSpacing: -1,
+            ),
           ),
           Text(
             'Academic Background • 2022 — 2027',

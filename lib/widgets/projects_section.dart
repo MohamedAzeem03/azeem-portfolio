@@ -31,7 +31,7 @@ final List<CaseStudy> _projects = [
   ),
   const CaseStudy(
     projectName: 'YOUR FRIENDEEY',
-    projectType: 'INTERNSHIP PROJECT',
+    projectType: 'PERSONAL PROJECT',
     description: 'Developed a web app that provides AI-based advice based on the user\'s mood, with React frontend, Django backend, and AI API integration.',
     challenge: 'Users may need simple guidance based on their current mood but may not know where to find personalized advice.',
     solution: 'Built an AI-powered web application that provides advice based on the user\'s selected mood.',
@@ -53,7 +53,7 @@ final List<CaseStudy> _projects = [
   ),
   const CaseStudy(
     projectName: 'AZM QUICKBITE',
-    projectType: 'PERSONAL PROJECT',
+    projectType: 'INTERNSHIP PROJECT',
     description: 'Developed a food ordering web app with user login, product management, cart, order processing, and an interactive QuickBite Assistant.',
     challenge: 'Users need a simple way to browse food items, manage their cart, and place orders through a single application.',
     solution: 'Built a food ordering web application with user authentication, product management, cart functionality, order processing, and an AI-powered QuickBite Assistant.',
@@ -113,7 +113,7 @@ class ProjectsSection extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: isMobile ? 24 : 48),
             child: Text(
-              'SELECTED PROJECTS',
+              'MY PROJECTS',
               style: TextStyle(
                 fontFamily: 'Cormorant Garamond', 
                 fontSize: isMobile ? 42 : 64, 

@@ -50,8 +50,14 @@ class _ContactSectionState extends State<ContactSection> {
           ),
           const SizedBox(height: 8),
           Text(
-            'Get In Touch',
-            style: TextStyle(fontFamily: 'Cormorant Garamond', fontSize: 48, color: Colors.white),
+            'GET IN TOUCH',
+            style: TextStyle(
+              fontFamily: 'Cormorant Garamond', 
+              fontSize: isMobile ? 42 : 64, 
+              fontWeight: FontWeight.w900, 
+              color: Colors.white,
+              letterSpacing: -1,
+            ),
           ),
           Text(
             'Feel free to reach out for collaborations or just a friendly hello.',

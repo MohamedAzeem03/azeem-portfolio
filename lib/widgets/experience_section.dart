@@ -6,6 +6,8 @@ class ExperienceSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isMobile = MediaQuery.of(context).size.width < 768;
+
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 80),
       decoration: const BoxDecoration(
@@ -20,8 +22,14 @@ class ExperienceSection extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'My Experience',
-            style: TextStyle(fontFamily: 'Cormorant Garamond', fontSize: 48, color: Colors.black),
+            'MY EXPERIENCE',
+            style: TextStyle(
+              fontFamily: 'Cormorant Garamond', 
+              fontSize: isMobile ? 42 : 64, 
+              fontWeight: FontWeight.w900, 
+              color: Colors.black,
+              letterSpacing: -1,
+            ),
           ),
           Text(
             'Professional Journey • 2023 — Present',

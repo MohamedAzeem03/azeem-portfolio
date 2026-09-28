@@ -57,9 +57,15 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
                     style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500, letterSpacing: 1.5),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
-                    'My Skills',
-                    style: TextStyle(fontFamily: 'Cormorant Garamond', fontSize: 48, color: Colors.black),
+                  Text(
+                    'MY SKILLS',
+                    style: TextStyle(
+                      fontFamily: 'Cormorant Garamond', 
+                      fontSize: isMobile ? 42 : 64, 
+                      fontWeight: FontWeight.w900, 
+                      color: Colors.black,
+                      letterSpacing: -1,
+                    ),
                   ),
                   const SizedBox(height: 32),
                   Row(

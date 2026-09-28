@@ -7,6 +7,7 @@ class AboutSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isDesktop = MediaQuery.of(context).size.width > 900;
+    bool isMobile = MediaQuery.of(context).size.width < 768;
     
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 80),
@@ -16,6 +17,22 @@ class AboutSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text(
+            '05 / ABOUT',
+            style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500, letterSpacing: 1.5),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'ABOUT ME',
+            style: TextStyle(
+              fontFamily: 'Cormorant Garamond', 
+              fontSize: isMobile ? 42 : 64, 
+              fontWeight: FontWeight.w900, 
+              color: Colors.black,
+              letterSpacing: -1,
+            ),
+          ),
+          const SizedBox(height: 48),
           isDesktop 
             ? Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -78,7 +95,6 @@ class AboutSection extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 24),
-        Text('05 / PROFILE', style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500, letterSpacing: 1.5)),
         Text('Mohamed Azeem', style: TextStyle(fontFamily: 'Cormorant Garamond', fontSize: 32, color: Colors.black)),
         Text('Full-Stack Application Developer', style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade600)),
       ],
