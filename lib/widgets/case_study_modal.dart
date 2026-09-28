@@ -222,8 +222,7 @@ class CaseStudyModal extends StatelessWidget {
 
 class HoverTechBadge extends StatefulWidget {
   final String tech;
-  final bool isDark;
-  const HoverTechBadge({super.key, required this.tech, this.isDark = false});
+  const HoverTechBadge({super.key, required this.tech});
 
   @override
   State<HoverTechBadge> createState() => _HoverTechBadgeState();
@@ -241,24 +240,16 @@ class _HoverTechBadgeState extends State<HoverTechBadge> {
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
         decoration: BoxDecoration(
-          color: _isHovered 
-              ? (widget.isDark ? Colors.white : Colors.black) 
-              : (widget.isDark ? Colors.grey.shade900 : Colors.grey.shade100),
+          color: _isHovered ? Colors.black : Colors.grey.shade100,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-              color: _isHovered 
-                  ? (widget.isDark ? Colors.white : Colors.black) 
-                  : (widget.isDark ? Colors.grey.shade800 : Colors.grey.shade200)
-          ),
+          border: Border.all(color: _isHovered ? Colors.black : Colors.grey.shade200),
         ),
         child: AnimatedDefaultTextStyle(
           duration: const Duration(milliseconds: 200),
           style: TextStyle(
             fontFamily: 'DM Mono',
             fontSize: 11,
-            color: _isHovered 
-                ? (widget.isDark ? Colors.black : Colors.white) 
-                : (widget.isDark ? Colors.grey.shade300 : Colors.grey.shade800),
+            color: _isHovered ? Colors.white : Colors.grey.shade800,
           ),
           child: Text(widget.tech.trim()),
         ),

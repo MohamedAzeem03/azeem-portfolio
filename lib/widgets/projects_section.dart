@@ -31,7 +31,7 @@ final List<CaseStudy> _projects = [
   ),
   const CaseStudy(
     projectName: 'YOUR FRIENDEEY',
-    projectType: 'PERSONAL PROJECT',
+    projectType: 'INTERNSHIP PROJECT',
     description: 'Developed a web app that provides AI-based advice based on the user\'s mood, with React frontend, Django backend, and AI API integration.',
     challenge: 'Users may need simple guidance based on their current mood but may not know where to find personalized advice.',
     solution: 'Built an AI-powered web application that provides advice based on the user\'s selected mood.',
@@ -53,7 +53,7 @@ final List<CaseStudy> _projects = [
   ),
   const CaseStudy(
     projectName: 'AZM QUICKBITE',
-    projectType: 'INTERNSHIP PROJECT',
+    projectType: 'PERSONAL PROJECT',
     description: 'Developed a food ordering web app with user login, product management, cart, order processing, and an interactive QuickBite Assistant.',
     challenge: 'Users need a simple way to browse food items, manage their cart, and place orders through a single application.',
     solution: 'Built a food ordering web application with user authentication, product management, cart functionality, order processing, and an AI-powered QuickBite Assistant.',
@@ -113,7 +113,7 @@ class ProjectsSection extends StatelessWidget {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: isMobile ? 24 : 48),
             child: Text(
-              'MY PROJECTS',
+              'SELECTED PROJECTS',
               style: TextStyle(
                 fontFamily: 'Cormorant Garamond', 
                 fontSize: isMobile ? 42 : 64, 
@@ -211,9 +211,9 @@ class ProjectsSection extends StatelessWidget {
     
     return Container(
       decoration: BoxDecoration(
-        color: Colors.black,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: Colors.grey.shade900, width: 1.5),
+        border: Border.all(color: Colors.grey.shade200, width: 1.5),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.05),
@@ -243,7 +243,7 @@ class ProjectsSection extends StatelessWidget {
                   width: isTablet ? 70 : 100,
                   child: Text(
                     projectNum,
-                    style: TextStyle(fontFamily: 'Inter', fontSize: isTablet ? 56 : 72, fontWeight: FontWeight.bold, color: Colors.grey.shade800, height: 1),
+                    style: TextStyle(fontFamily: 'Inter', fontSize: isTablet ? 56 : 72, fontWeight: FontWeight.bold, color: Colors.grey.shade300, height: 1),
                   ),
                 ),
                 // Details
@@ -252,15 +252,15 @@ class ProjectsSection extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(project.projectType.toUpperCase(), style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade400, letterSpacing: 1.5)),
+                      Text(project.projectType.toUpperCase(), style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500, letterSpacing: 1.5)),
                       const SizedBox(height: 8),
-                      Text(project.projectName.toUpperCase(), style: TextStyle(fontFamily: 'Inter', fontSize: 36, fontWeight: FontWeight.w900, color: Colors.white, letterSpacing: -0.5)),
+                      Text(project.projectName.toUpperCase(), style: TextStyle(fontFamily: 'Inter', fontSize: 36, fontWeight: FontWeight.w900, color: Colors.black, letterSpacing: -0.5)),
                       const SizedBox(height: 16), // Reduced from 24
-                      Text(project.description, style: TextStyle(fontFamily: 'Inter', fontSize: 16, color: Colors.grey.shade300, height: 1.5)),
+                      Text(project.description, style: TextStyle(fontFamily: 'Inter', fontSize: 16, color: Colors.grey.shade700, height: 1.5)),
                       const SizedBox(height: 24), // Reduced from 32
                       Text('Technologies:', style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500)),
                       const SizedBox(height: 12),
-                      Wrap(spacing: 8, runSpacing: 8, children: project.technologies.map((t) => HoverTechBadge(tech: t, isDark: true)).toList()),
+                      Wrap(spacing: 8, runSpacing: 8, children: project.technologies.map((t) => HoverTechBadge(tech: t)).toList()),
                       const Spacer(),
                       _buildCaseStudyButton(context, project),
                     ],
@@ -272,9 +272,9 @@ class ProjectsSection extends StatelessWidget {
                   flex: 4,
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.grey.shade900,
+                      color: Colors.grey.shade50,
                       borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: Colors.grey.shade800),
+                      border: Border.all(color: Colors.grey.shade200),
                     ),
                     child: project.imagePath != null
                         ? ClipRRect(
@@ -285,9 +285,9 @@ class ProjectsSection extends StatelessWidget {
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Icon(Icons.image_outlined, size: 48, color: Colors.grey.shade700),
+                                Icon(Icons.image_outlined, size: 48, color: Colors.grey.shade300),
                                 const SizedBox(height: 16),
-                                Text('Image\nPlaceholder', textAlign: TextAlign.center, style: TextStyle(fontFamily: 'DM Mono', color: Colors.grey.shade600, fontSize: 12)),
+                                Text('Image\nPlaceholder', textAlign: TextAlign.center, style: TextStyle(fontFamily: 'DM Mono', color: Colors.grey.shade400, fontSize: 12)),
                               ],
                             ),
                           ),
@@ -297,13 +297,13 @@ class ProjectsSection extends StatelessWidget {
             ),
           ),
         ),
-        const Divider(height: 1, color: Color(0xFF222222)),
+        const Divider(height: 1, color: Color(0xFFEEEEEE)),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: isTablet ? 32.0 : 36.0, vertical: 24.0), // Reduced vertical from 32 to 24
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('KEY WORK', style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white, letterSpacing: 1.5)),
+              const Text('KEY WORK', style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black, letterSpacing: 1.5)),
               const SizedBox(height: 12), // Reduced from 16
               Wrap(
                 spacing: 32,
@@ -313,8 +313,8 @@ class ProjectsSection extends StatelessWidget {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('• ', style: TextStyle(fontFamily: 'Inter', color: Colors.white, fontSize: 14)),
-                      Expanded(child: Text(k, style: TextStyle(fontFamily: 'Inter', color: Colors.grey.shade400, fontSize: 14, height: 1.4))),
+                      const Text('• ', style: TextStyle(fontFamily: 'Inter', color: Colors.black, fontSize: 14)),
+                      Expanded(child: Text(k, style: TextStyle(fontFamily: 'Inter', color: Colors.grey.shade700, fontSize: 14, height: 1.4))),
                     ],
                   ),
                 )).toList(),
@@ -335,45 +335,45 @@ class ProjectsSection extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(projectNum, style: TextStyle(fontFamily: 'Inter', fontSize: 56, fontWeight: FontWeight.bold, color: Colors.grey.shade800, height: 1)),
+            Text(projectNum, style: TextStyle(fontFamily: 'Inter', fontSize: 56, fontWeight: FontWeight.bold, color: Colors.grey.shade300, height: 1)),
             const SizedBox(height: 16),
-            Text(project.projectType.toUpperCase(), style: TextStyle(fontFamily: 'DM Mono', fontSize: 10, color: Colors.grey.shade400, letterSpacing: 1.5)),
+            Text(project.projectType.toUpperCase(), style: TextStyle(fontFamily: 'DM Mono', fontSize: 10, color: Colors.grey.shade500, letterSpacing: 1.5)),
             const SizedBox(height: 4),
-            Text(project.projectName.toUpperCase(), style: TextStyle(fontFamily: 'Inter', fontSize: 28, fontWeight: FontWeight.w900, color: Colors.white)),
+            Text(project.projectName.toUpperCase(), style: TextStyle(fontFamily: 'Inter', fontSize: 28, fontWeight: FontWeight.w900, color: Colors.black)),
             const SizedBox(height: 16),
-            Text(project.description, style: TextStyle(fontFamily: 'Inter', fontSize: 14, color: Colors.grey.shade300, height: 1.6)),
+            Text(project.description, style: TextStyle(fontFamily: 'Inter', fontSize: 14, color: Colors.grey.shade700, height: 1.6)),
             const SizedBox(height: 24),
-            Wrap(spacing: 6, runSpacing: 6, children: project.technologies.map((t) => HoverTechBadge(tech: t, isDark: true)).toList()),
+            Wrap(spacing: 6, runSpacing: 6, children: project.technologies.map((t) => HoverTechBadge(tech: t)).toList()),
             const SizedBox(height: 32),
             Container(
               height: 200,
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.grey.shade900,
+                color: Colors.grey.shade50,
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: Colors.grey.shade800),
+                border: Border.all(color: Colors.grey.shade200),
               ),
               child: project.imagePath != null
                   ? ClipRRect(
                       borderRadius: BorderRadius.circular(12),
                       child: Image.asset(project.imagePath!, fit: BoxFit.cover),
                     )
-                  : Center(child: Icon(Icons.image_outlined, size: 32, color: Colors.grey.shade700)),
+                  : Center(child: Icon(Icons.image_outlined, size: 32, color: Colors.grey.shade300)),
             ),
             const SizedBox(height: 32),
             _buildCaseStudyButton(context, project),
             const SizedBox(height: 32),
-            const Divider(height: 1, color: Color(0xFF222222)),
+            const Divider(height: 1, color: Color(0xFFEEEEEE)),
             const SizedBox(height: 24),
-            const Text('KEY WORK', style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, fontWeight: FontWeight.bold, color: Colors.white, letterSpacing: 1.5)),
+            const Text('KEY WORK', style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black, letterSpacing: 1.5)),
             const SizedBox(height: 16),
             ...project.keyOutcomes.map((k) => Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('• ', style: TextStyle(fontFamily: 'Inter', color: Colors.white, fontSize: 14)),
-                  Expanded(child: Text(k, style: TextStyle(fontFamily: 'Inter', color: Colors.grey.shade400, fontSize: 14, height: 1.4))),
+                  const Text('• ', style: TextStyle(fontFamily: 'Inter', color: Colors.black, fontSize: 14)),
+                  Expanded(child: Text(k, style: TextStyle(fontFamily: 'Inter', color: Colors.grey.shade700, fontSize: 14, height: 1.4))),
                 ],
               ),
             )),
@@ -422,10 +422,10 @@ class _HoverButtonState extends State<_HoverButton> {
           curve: Curves.easeInOutSine,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           decoration: BoxDecoration(
-            color: _isHovered ? Colors.transparent : Colors.white,
+            color: _isHovered ? Colors.transparent : Colors.black,
             borderRadius: BorderRadius.circular(32),
             border: Border.all(
-              color: _isHovered ? Colors.grey.shade600 : Colors.white,
+              color: _isHovered ? Colors.grey.shade400 : Colors.black,
             ),
           ),
           child: Row(
@@ -439,14 +439,14 @@ class _HoverButtonState extends State<_HoverButton> {
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1.0,
-                  color: _isHovered ? Colors.white : Colors.black,
+                  color: _isHovered ? Colors.black : Colors.white,
                 ),
                 child: Text('${widget.text}  '),
               ),
               TweenAnimationBuilder<Color?>(
                 tween: ColorTween(
-                  begin: Colors.black,
-                  end: _isHovered ? Colors.white : Colors.black,
+                  begin: Colors.white,
+                  end: _isHovered ? Colors.black : Colors.white,
                 ),
                 duration: const Duration(milliseconds: 250),
                 curve: Curves.easeInOutSine,
