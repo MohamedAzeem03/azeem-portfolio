@@ -97,7 +97,11 @@ class ProjectsSection extends StatelessWidget {
     double totalHeight = requiredStackHeight + headerHeight;
 
     // Pin offset dictates how far from the top of the viewport the stack will lock.
-    double pinViewportOffset = isMobile ? 80.0 : 120.0; 
+    // We calculate this dynamically so the card perfectly centers itself vertically on any screen.
+    double screenHeight = MediaQuery.of(context).size.height;
+    double idealPinOffset = (screenHeight - cardHeight) / 2;
+    // Cap it to ensure it doesn't clip into the top navigation bar (min 80px)
+    double pinViewportOffset = max(80.0, idealPinOffset);
 
     return Container(
       height: totalHeight,
