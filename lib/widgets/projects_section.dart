@@ -77,57 +77,11 @@ final List<CaseStudy> _projects = [
   ),
 ];
 
-class ProjectsSection extends StatefulWidget {
+class ProjectsSection extends StatelessWidget {
   const ProjectsSection({super.key});
 
   @override
-  State<ProjectsSection> createState() => _ProjectsSectionState();
-}
-
-class _ProjectsSectionState extends State<ProjectsSection> {
-  final GlobalKey _sectionKey = GlobalKey();
-  ScrollPosition? _scrollPosition;
-  double _globalTopOffset = 0.0;
-  bool _isOffsetCalculated = false;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    _scrollPosition?.removeListener(_onScroll);
-    _scrollPosition = Scrollable.of(context).position;
-    _scrollPosition?.addListener(_onScroll);
-  }
-
-  @override
-  void dispose() {
-    _scrollPosition?.removeListener(_onScroll);
-    super.dispose();
-  }
-
-  void _onScroll() {
-    if (!_isOffsetCalculated) {
-      _calculateOffset();
-    }
-    setState(() {}); // Trigger rebuild to update transforms
-  }
-
-  void _calculateOffset() {
-    if (_sectionKey.currentContext != null) {
-      final RenderBox box = _sectionKey.currentContext!.findRenderObject() as RenderBox;
-      final ScrollableState scrollable = Scrollable.of(context)!;
-      final RenderBox scrollableBox = scrollable.context.findRenderObject() as RenderBox;
-      final Offset offset = box.localToGlobal(Offset.zero, ancestor: scrollableBox);
-      _globalTopOffset = offset.dy + _scrollPosition!.pixels;
-      _isOffsetCalculated = true;
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    if (!_isOffsetCalculated) {
-      WidgetsBinding.instance.addPostFrameCallback((_) => _calculateOffset());
-    }
-
     bool isMobile = MediaQuery.of(context).size.width < 768;
     bool isTablet = MediaQuery.of(context).size.width >= 768 && MediaQuery.of(context).size.width < 1024;
     
@@ -142,16 +96,10 @@ class _ProjectsSectionState extends State<ProjectsSection> {
     double headerHeight = 200.0; 
     double totalHeight = requiredStackHeight + headerHeight;
 
-    double currentScroll = _scrollPosition?.pixels ?? 0.0;
-    
     // Pin offset dictates how far from the top of the viewport the stack will lock.
     double pinViewportOffset = isMobile ? 80.0 : 150.0; 
-    
-    // localScroll is how far we've scrolled PAST the pin activation point
-    double localScroll = max(0.0, currentScroll - _globalTopOffset + pinViewportOffset);
 
     return Container(
-      key: _sectionKey,
       height: totalHeight,
       padding: const EdgeInsets.only(top: 80, bottom: 40),
       color: Colors.white,
@@ -175,44 +123,74 @@ class _ProjectsSectionState extends State<ProjectsSection> {
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: isMobile ? 16 : 48),
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: List.generate(_projects.length, (i) {
-                  double startScroll = i * scrollDistancePerCard;
-                  double dyRelativeToPin = max(i * 40.0, startScroll - localScroll);
-                  
-                  // Math: Move down by localScroll to counteract parent scrolling (pinning),
-                  // then add the relative Y offset to arrange the stack.
-                  double localDy = localScroll + dyRelativeToPin;
-                  
-                  // Push back progress: 0.0 to 1.0 as the *next* card slides over this one
-                  double pushBackProgress = 0.0;
-                  if (localScroll > startScroll) {
-                    pushBackProgress = min(1.0, (localScroll - startScroll) / scrollDistancePerCard);
-                  }
-                  
-                  // Inactive cards scale down and dim slightly
-                  double scale = 1.0 - (pushBackProgress * 0.03); 
-                  double opacity = 1.0 - (pushBackProgress * 0.2);
+              // We need a context that has a RenderBox for the Stack area itself.
+              child: Builder(
+                builder: (stackContext) {
+                  return AnimatedBuilder(
+                    animation: Scrollable.of(stackContext)!.position,
+                    builder: (context, child) {
+                      double localScroll = 0.0;
+                      
+                      // Calculate exactly how far the top of this stack area is from the screen top.
+                      final RenderBox? box = stackContext.findRenderObject() as RenderBox?;
+                      if (box != null && box.hasSize) {
+                        try {
+                          // Find position relative to the nearest scrollable (the viewport)
+                          final RenderBox scrollableBox = Scrollable.of(stackContext)!.context.findRenderObject() as RenderBox;
+                          final Offset offset = box.localToGlobal(Offset.zero, ancestor: scrollableBox);
+                          
+                          // screenY is the current Y position of the Stack's top edge relative to the Viewport
+                          double screenY = offset.dy;
+                          
+                          // If screenY is less than our desired pin offset, we have scrolled past it!
+                          localScroll = max(0.0, pinViewportOffset - screenY);
+                        } catch (e) {
+                          // Ignore if render tree is not fully ready
+                        }
+                      }
 
-                  return Positioned(
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: cardHeight,
-                    child: Transform.translate(
-                      offset: Offset(0, localDy),
-                      child: Transform.scale(
-                        scale: scale,
-                        alignment: Alignment.topCenter,
-                        child: Opacity(
-                          opacity: opacity,
-                          child: _buildProjectCard(context, _projects[i], i, isMobile, isTablet),
-                        ),
-                      ),
-                    ),
+                      return Stack(
+                        clipBehavior: Clip.none,
+                        children: List.generate(_projects.length, (i) {
+                          double startScroll = i * scrollDistancePerCard;
+                          double dyRelativeToPin = max(i * 40.0, startScroll - localScroll);
+                          
+                          // Math: Move down by localScroll to counteract parent scrolling (pinning),
+                          // then add the relative Y offset to arrange the stack.
+                          double localDy = localScroll + dyRelativeToPin;
+                          
+                          // Push back progress: 0.0 to 1.0 as the *next* card slides over this one
+                          double pushBackProgress = 0.0;
+                          if (localScroll > startScroll) {
+                            pushBackProgress = min(1.0, (localScroll - startScroll) / scrollDistancePerCard);
+                          }
+                          
+                          // Inactive cards scale down and dim slightly
+                          double scale = 1.0 - (pushBackProgress * 0.04); 
+                          double opacity = 1.0 - (pushBackProgress * 0.2);
+
+                          return Positioned(
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            height: cardHeight,
+                            child: Transform.translate(
+                              offset: Offset(0, localDy),
+                              child: Transform.scale(
+                                scale: scale,
+                                alignment: Alignment.topCenter,
+                                child: Opacity(
+                                  opacity: opacity,
+                                  child: _buildProjectCard(context, _projects[i], i, isMobile, isTablet),
+                                ),
+                              ),
+                            ),
+                          );
+                        }),
+                      );
+                    },
                   );
-                }),
+                },
               ),
             ),
           ),
