@@ -97,7 +97,7 @@ class ProjectsSection extends StatelessWidget {
     double totalHeight = requiredStackHeight + headerHeight;
 
     // Pin offset dictates how far from the top of the viewport the stack will lock.
-    double pinViewportOffset = isMobile ? 80.0 : 150.0; 
+    double pinViewportOffset = isMobile ? 80.0 : 120.0; 
 
     return Container(
       height: totalHeight,
@@ -149,20 +149,23 @@ class ProjectsSection extends StatelessWidget {
                         }
                       }
 
+                      // Cap the local scroll so the stack releases and scrolls up naturally after the last project
+                      double cappedLocalScroll = min(localScroll, maxLocalScroll);
+
                       return Stack(
                         clipBehavior: Clip.none,
                         children: List.generate(_projects.length, (i) {
                           double startScroll = i * scrollDistancePerCard;
-                          double dyRelativeToPin = max(i * 40.0, startScroll - localScroll);
+                          double dyRelativeToPin = max(i * 40.0, startScroll - cappedLocalScroll);
                           
-                          // Math: Move down by localScroll to counteract parent scrolling (pinning),
+                          // Math: Move down by cappedLocalScroll to counteract parent scrolling (pinning),
                           // then add the relative Y offset to arrange the stack.
-                          double localDy = localScroll + dyRelativeToPin;
+                          double localDy = cappedLocalScroll + dyRelativeToPin;
                           
                           // Push back progress: 0.0 to 1.0 as the *next* card slides over this one
                           double pushBackProgress = 0.0;
-                          if (localScroll > startScroll) {
-                            pushBackProgress = min(1.0, (localScroll - startScroll) / scrollDistancePerCard);
+                          if (cappedLocalScroll > startScroll) {
+                            pushBackProgress = min(1.0, (cappedLocalScroll - startScroll) / scrollDistancePerCard);
                           }
                           
                           // Inactive cards scale down and dim slightly
