@@ -86,7 +86,7 @@ class ProjectsSection extends StatelessWidget {
     bool isTablet = MediaQuery.of(context).size.width >= 768 && MediaQuery.of(context).size.width < 1024;
     
     // Card Dimensions
-    double cardHeight = isMobile ? 800.0 : (isTablet ? 750.0 : 650.0);
+    double cardHeight = isMobile ? 800.0 : (isTablet ? 750.0 : 600.0); // Reduced desktop height to 600
     double scrollDistancePerCard = cardHeight + 50.0;
     
     // Total section height = Required height for cards to stack perfectly + headers
@@ -97,11 +97,11 @@ class ProjectsSection extends StatelessWidget {
     double totalHeight = requiredStackHeight + headerHeight;
 
     // Pin offset dictates how far from the top of the viewport the stack will lock.
-    // We calculate this dynamically so the card perfectly centers itself vertically on any screen.
     double screenHeight = MediaQuery.of(context).size.height;
-    double idealPinOffset = (screenHeight - cardHeight) / 2;
-    // Cap it to ensure it doesn't clip into the top navigation bar (min 80px)
-    double pinViewportOffset = max(80.0, idealPinOffset);
+    // We subtract 60 to push the center point higher up, accounting for the top navbar!
+    double idealPinOffset = (screenHeight - cardHeight) / 2 - 60.0;
+    // Cap it to ensure it doesn't clip too high
+    double pinViewportOffset = max(20.0, idealPinOffset);
 
     return Container(
       height: totalHeight,
@@ -234,7 +234,7 @@ class ProjectsSection extends StatelessWidget {
       children: [
         Expanded(
           child: Padding(
-            padding: EdgeInsets.all(isTablet ? 32.0 : 48.0),
+            padding: EdgeInsets.all(isTablet ? 32.0 : 36.0), // Reduced from 48
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -255,9 +255,9 @@ class ProjectsSection extends StatelessWidget {
                       Text(project.projectType.toUpperCase(), style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500, letterSpacing: 1.5)),
                       const SizedBox(height: 8),
                       Text(project.projectName.toUpperCase(), style: TextStyle(fontFamily: 'Inter', fontSize: 36, fontWeight: FontWeight.w900, color: Colors.black, letterSpacing: -0.5)),
-                      const SizedBox(height: 24),
-                      Text(project.description, style: TextStyle(fontFamily: 'Inter', fontSize: 16, color: Colors.grey.shade700, height: 1.6)),
-                      const SizedBox(height: 32),
+                      const SizedBox(height: 16), // Reduced from 24
+                      Text(project.description, style: TextStyle(fontFamily: 'Inter', fontSize: 16, color: Colors.grey.shade700, height: 1.5)),
+                      const SizedBox(height: 24), // Reduced from 32
                       Text('Technologies:', style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500)),
                       const SizedBox(height: 12),
                       Wrap(spacing: 8, runSpacing: 8, children: project.technologies.map((t) => HoverTechBadge(tech: t)).toList()),
@@ -299,15 +299,15 @@ class ProjectsSection extends StatelessWidget {
         ),
         const Divider(height: 1, color: Color(0xFFEEEEEE)),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: isTablet ? 32.0 : 48.0, vertical: 32.0),
+          padding: EdgeInsets.symmetric(horizontal: isTablet ? 32.0 : 36.0, vertical: 24.0), // Reduced vertical from 32 to 24
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text('KEY WORK', style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black, letterSpacing: 1.5)),
-              const SizedBox(height: 16),
+              const SizedBox(height: 12), // Reduced from 16
               Wrap(
                 spacing: 32,
-                runSpacing: 12,
+                runSpacing: 8, // Reduced from 12
                 children: project.keyOutcomes.map((k) => SizedBox(
                   width: isTablet ? 250 : 300,
                   child: Row(
