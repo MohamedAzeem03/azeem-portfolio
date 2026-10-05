@@ -1,4 +1,8 @@
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 
 class ChatMessage {
   final String text;
@@ -13,11 +17,12 @@ class ChatbotWidget extends StatefulWidget {
   State<ChatbotWidget> createState() => _ChatbotWidgetState();
 }
 
-class _ChatbotWidgetState extends State<ChatbotWidget> with SingleTickerProviderStateMixin {
+class _ChatbotWidgetState extends State<ChatbotWidget>
+    with SingleTickerProviderStateMixin {
   bool _isOpen = false;
   final TextEditingController _controller = TextEditingController();
   final ScrollController _scrollController = ScrollController();
-  
+
   late AnimationController _bobController;
   late Animation<double> _bobAnimation;
 
@@ -28,7 +33,7 @@ class _ChatbotWidgetState extends State<ChatbotWidget> with SingleTickerProvider
       vsync: this,
       duration: const Duration(milliseconds: 1500),
     )..repeat(reverse: true);
-    
+
     _bobAnimation = Tween<double>(begin: 0, end: -12).animate(
       CurvedAnimation(parent: _bobController, curve: Curves.easeInOutSine),
     );
@@ -41,9 +46,14 @@ class _ChatbotWidgetState extends State<ChatbotWidget> with SingleTickerProvider
     _scrollController.dispose();
     super.dispose();
   }
-  
+
+  bool _isLoading = false;
+
   final List<ChatMessage> _messages = [
-    ChatMessage(text: 'Hi! I am Azeem\'s AI assistant. How can I help you today?', isBot: true),
+    ChatMessage(
+      text: 'Hi! I am Azeem\'s AI assistant. How can I help you today?',
+      isBot: true,
+    ),
   ];
 
   final List<String> _quickQuestions = [
@@ -53,23 +63,54 @@ class _ChatbotWidgetState extends State<ChatbotWidget> with SingleTickerProvider
     "How can I contact you?",
   ];
 
-  void _handleSubmitted(String text) {
+  Future<void> _handleSubmitted(String text) async {
     if (text.trim().isEmpty) return;
-    
+
     setState(() {
       _messages.add(ChatMessage(text: text, isBot: false));
+      _isLoading = true;
     });
-    
+
     _controller.clear();
     _scrollToBottom();
 
-    // Simulate network delay
-    Future.delayed(const Duration(milliseconds: 600), () {
+    try {
+      final response = await http.post(
+        Uri.parse('https://azeem-portfolio-ai-backend.onrender.com/api/chat'),
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'message': text}),
+      );
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        final reply = data['response'] ?? 'Sorry, I did not understand that.';
+        setState(() {
+          _messages.add(ChatMessage(text: reply, isBot: true));
+          _isLoading = false;
+        });
+      } else {
+        setState(() {
+          _messages.add(
+            ChatMessage(
+              text: 'Error connecting to server. Please try again.',
+              isBot: true,
+            ),
+          );
+          _isLoading = false;
+        });
+      }
+    } catch (e) {
       setState(() {
-        _messages.add(ChatMessage(text: _generateReply(text), isBot: true));
+        _messages.add(
+          ChatMessage(
+            text: 'Failed to reach the AI backend. Make sure the server is running.',
+            isBot: true,
+          ),
+        );
+        _isLoading = false;
       });
-      _scrollToBottom();
-    });
+    }
+    _scrollToBottom();
   }
 
   void _scrollToBottom() {
@@ -82,25 +123,6 @@ class _ChatbotWidgetState extends State<ChatbotWidget> with SingleTickerProvider
         );
       }
     });
-  }
-
-  String _generateReply(String question) {
-    String lowerq = question.toLowerCase();
-    if (lowerq.contains('skill') || lowerq.contains('tech') || lowerq.contains('stack')) {
-      return 'Azeem is highly skilled in Flutter, Dart, Java, Spring Boot, PostgreSQL, and AI integrations (like Gemini and ChatGPT).';
-    } else if (lowerq.contains('project') || lowerq.contains('work')) {
-      return 'Azeem has built some amazing projects, including Devora (a productivity & challenge app) and Your Friendeey (an AI-powered mood advice app).';
-    } else if (lowerq.contains('experience')) {
-      return 'He has strong experience building scalable applications, designing beautiful UIs, and integrating complex backend services with Spring Boot and AWS.';
-    } else if (lowerq.contains('contact') || lowerq.contains('hire') || lowerq.contains('email')) {
-      return 'You can reach out to Azeem via the Contact section at the bottom of the page, or connect with him on LinkedIn and GitHub!';
-    } else if (lowerq.contains('name') || lowerq.contains('who')) {
-      return 'My name is Azeem! I am a passionate developer specializing in Flutter and Java.';
-    } else if (lowerq.contains('hello') || lowerq.contains('hi') || lowerq.contains('hey')) {
-      return 'Hello! How can I assist you in learning more about Azeem?';
-    } else {
-      return 'That is a great question! I am still learning, but you can find more details in the portfolio sections or by reaching out to Azeem directly.';
-    }
   }
 
   @override
@@ -127,10 +149,26 @@ class _ChatbotWidgetState extends State<ChatbotWidget> with SingleTickerProvider
             child: ClipOval(
               child: ColorFiltered(
                 colorFilter: const ColorFilter.matrix([
-                  0.2126, 0.7152, 0.0722, 0, 0,
-                  0.2126, 0.7152, 0.0722, 0, 0,
-                  0.2126, 0.7152, 0.0722, 0, 0,
-                  0,      0,      0,      1, 0,
+                  0.2126,
+                  0.7152,
+                  0.0722,
+                  0,
+                  0,
+                  0.2126,
+                  0.7152,
+                  0.0722,
+                  0,
+                  0,
+                  0.2126,
+                  0.7152,
+                  0.0722,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1,
+                  0,
                 ]),
                 child: Image.asset(
                   'assets/images/chatbot.jpg',
@@ -148,7 +186,7 @@ class _ChatbotWidgetState extends State<ChatbotWidget> with SingleTickerProvider
 
   Widget _buildChatWindow() {
     bool isMobile = MediaQuery.of(context).size.width < 600;
-    
+
     return Container(
       width: isMobile ? MediaQuery.of(context).size.width - 32 : 350,
       height: 450,
@@ -171,17 +209,35 @@ class _ChatbotWidgetState extends State<ChatbotWidget> with SingleTickerProvider
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
               color: Colors.black,
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(15),
+              ),
             ),
             child: Row(
               children: [
                 ClipOval(
                   child: ColorFiltered(
                     colorFilter: const ColorFilter.matrix([
-                      0.2126, 0.7152, 0.0722, 0, 0,
-                      0.2126, 0.7152, 0.0722, 0, 0,
-                      0.2126, 0.7152, 0.0722, 0, 0,
-                      0,      0,      0,      1, 0,
+                      0.2126,
+                      0.7152,
+                      0.0722,
+                      0,
+                      0,
+                      0.2126,
+                      0.7152,
+                      0.0722,
+                      0,
+                      0,
+                      0.2126,
+                      0.7152,
+                      0.0722,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
                     ]),
                     child: Image.asset(
                       'assets/images/chatbot.jpg',
@@ -211,52 +267,62 @@ class _ChatbotWidgetState extends State<ChatbotWidget> with SingleTickerProvider
               ],
             ),
           ),
-          
+
           // Messages area
           Expanded(
             child: ListView.builder(
               controller: _scrollController,
               padding: const EdgeInsets.all(16),
-              itemCount: _messages.length,
+              itemCount: _messages.length + (_isLoading ? 1 : 0),
               itemBuilder: (context, index) {
+                if (index == _messages.length && _isLoading) {
+                  return _buildTypingIndicator();
+                }
                 final msg = _messages[index];
                 return _buildMessageBubble(msg);
               },
             ),
           ),
-          
+
           // Quick Questions
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: _quickQuestions.map((q) => Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: InkWell(
-                    onTap: () => _handleSubmitted(q),
-                    borderRadius: BorderRadius.circular(16),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey.shade300),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: Text(
-                        q,
-                        style: TextStyle(
-                          fontFamily: 'Inter',
-                          fontSize: 12,
-                          color: Colors.grey.shade800,
+                children: _quickQuestions
+                    .map(
+                      (q) => Padding(
+                        padding: const EdgeInsets.only(right: 8),
+                        child: InkWell(
+                          onTap: () => _handleSubmitted(q),
+                          borderRadius: BorderRadius.circular(16),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 6,
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey.shade300),
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            child: Text(
+                              q,
+                              style: TextStyle(
+                                fontFamily: 'Inter',
+                                fontSize: 12,
+                                color: Colors.grey.shade800,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                )).toList(),
+                    )
+                    .toList(),
               ),
             ),
           ),
-          
+
           // Input field
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -279,10 +345,7 @@ class _ChatbotWidgetState extends State<ChatbotWidget> with SingleTickerProvider
                       isDense: true,
                       contentPadding: EdgeInsets.zero,
                     ),
-                    style: const TextStyle(
-                      fontFamily: 'Inter',
-                      fontSize: 14,
-                    ),
+                    style: const TextStyle(fontFamily: 'Inter', fontSize: 14),
                     onSubmitted: _handleSubmitted,
                   ),
                 ),
@@ -314,14 +377,78 @@ class _ChatbotWidgetState extends State<ChatbotWidget> with SingleTickerProvider
           ),
         ),
         constraints: const BoxConstraints(maxWidth: 250),
-        child: Text(
-          msg.text,
-          style: TextStyle(
-            fontFamily: 'Inter',
-            fontSize: 14,
-            color: msg.isBot ? Colors.black87 : Colors.white,
-            height: 1.4,
+        child: MarkdownBody(
+          data: msg.text,
+          styleSheet: MarkdownStyleSheet(
+            p: TextStyle(
+              fontFamily: 'Inter',
+              fontSize: 14,
+              color: msg.isBot ? Colors.black87 : Colors.white,
+              height: 1.4,
+            ),
+            strong: TextStyle(
+              fontFamily: 'Inter',
+              fontWeight: FontWeight.bold,
+              color: msg.isBot ? Colors.black87 : Colors.white,
+            ),
+            h1: _getHeadingStyle(msg.isBot, 20),
+            h2: _getHeadingStyle(msg.isBot, 18),
+            h3: _getHeadingStyle(msg.isBot, 16),
+            h4: _getHeadingStyle(msg.isBot, 15),
+            h5: _getHeadingStyle(msg.isBot, 14),
+            h6: _getHeadingStyle(msg.isBot, 14),
+            listBullet: TextStyle(
+              color: msg.isBot ? Colors.black87 : Colors.white,
+            ),
           ),
+        ),
+      ),
+    );
+  }
+
+  TextStyle _getHeadingStyle(bool isBot, double size) {
+    return TextStyle(
+      fontFamily: 'Inter',
+      fontSize: size,
+      fontWeight: FontWeight.bold,
+      color: isBot ? Colors.black87 : Colors.white,
+      height: 1.4,
+    );
+  }
+
+  Widget _buildTypingIndicator() {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Container(
+        margin: const EdgeInsets.only(bottom: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        decoration: BoxDecoration(
+          color: Colors.grey.shade100,
+          borderRadius: BorderRadius.circular(16)
+              .copyWith(bottomLeft: const Radius.circular(0)),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const SizedBox(
+              width: 12,
+              height: 12,
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                color: Colors.black54,
+              ),
+            ),
+            const SizedBox(width: 8),
+            const Text(
+              'Typing...',
+              style: TextStyle(
+                fontFamily: 'Inter',
+                fontSize: 14,
+                color: Colors.black54,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+          ],
         ),
       ),
     );
