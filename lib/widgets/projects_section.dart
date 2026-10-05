@@ -28,6 +28,7 @@ final List<CaseStudy> _projects = [
       'Push notifications'
     ],
     technologies: ['Flutter', 'Dart', 'Java', 'Spring Boot', 'REST APIs', 'Firebase', 'Git', 'GitHub'],
+    imagePath: 'assets/images/Devora.png',
   ),
   const CaseStudy(
     projectName: 'YOUR FRIENDEEY',
@@ -50,6 +51,7 @@ final List<CaseStudy> _projects = [
       'Database management'
     ],
     technologies: ['React', 'Django', 'Python', 'AI API'],
+    imagePath: 'assets/images/Friendeey.png',
   ),
   const CaseStudy(
     projectName: 'AZM QUICKBITE',
@@ -74,6 +76,7 @@ final List<CaseStudy> _projects = [
       'AI chatbot integration'
     ],
     technologies: ['Django', 'Python', 'HTML', 'CSS', 'JavaScript', 'Bootstrap'],
+    imagePath: 'assets/images/AzmQuickBite.png',
   ),
 ];
 
