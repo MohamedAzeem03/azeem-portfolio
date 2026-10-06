@@ -39,7 +39,7 @@ class _ContactSectionState extends State<ContactSection> {
     bool isMobile = MediaQuery.of(context).size.width < 768;
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 80),
+      padding: EdgeInsets.symmetric(horizontal: isMobile ? 24 : 48, vertical: 80),
       color: Colors.black,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
