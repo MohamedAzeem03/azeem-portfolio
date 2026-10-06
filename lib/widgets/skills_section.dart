@@ -37,7 +37,7 @@ class _SkillsSectionState extends State<SkillsSection> with SingleTickerProvider
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 80),
+      padding: EdgeInsets.symmetric(horizontal: isMobile ? 24 : 48, vertical: 80),
       decoration: const BoxDecoration(
         color: Color(0xFFFAFAFA),
         border: Border(bottom: BorderSide(color: Color(0xFFE5E5E5))),

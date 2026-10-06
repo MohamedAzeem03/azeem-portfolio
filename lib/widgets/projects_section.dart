@@ -115,15 +115,25 @@ class ProjectsSection extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: isMobile ? 24 : 48),
-            child: Text(
-              'MY PROJECTS',
-              style: TextStyle(
-                fontFamily: 'Cormorant Garamond', 
-                fontSize: isMobile ? 42 : 64, 
-                fontWeight: FontWeight.w900, 
-                color: Colors.black,
-                letterSpacing: -1,
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '// 02 PROJECTS',
+                  style: TextStyle(fontFamily: 'DM Mono', fontSize: 12, color: Colors.grey.shade500, letterSpacing: 1.5),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  'MY PROJECTS',
+                  style: TextStyle(
+                    fontFamily: 'Cormorant Garamond', 
+                    fontSize: isMobile ? 42 : 64, 
+                    fontWeight: FontWeight.w900, 
+                    color: Colors.black,
+                    letterSpacing: -1,
+                  ),
+                ),
+              ],
             ),
           ),
           SizedBox(height: isMobile ? 24 : 48),
